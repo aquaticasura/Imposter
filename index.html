@@ -13,24 +13,30 @@
 
 <body>
     <script src="js/bootstrap.js"></script>
-
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 id="role" class="card-title">Role</h5>
+                <p id="desc" class="card-text">Description</p>
+                <p id="button" class="btn btn-primary" style="" onmousedown="mouseDown()" onmouseup="mouseUp()">test</p>
             </div>
         </div>
     </div>
+    <p id="button" onmousedown="mouseDown()" onmouseup="mouseUp()">test</p>
+
+
+    <script>
+        function mouseDown() {
+            document.getElementById("button").style.color = "red";
+            document.getElementById("role").textContent = "Imposter"
+        }
+        function mouseUp() {
+            document.getElementById("button").style.color = "blue";
+            document.getElementById("role").textContent = "Role"
+        }
+    </script>
+
 
 </body>
 
