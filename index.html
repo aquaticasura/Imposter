@@ -11,28 +11,16 @@
 
 </head>
 
-<style>
-    .prevent-select {
-        -webkit-user-select: none;
-        /* Safari */
-        -ms-user-select: none;
-        /* IE 10 and IE 11 */
-        user-select: none;
-        /* Standard syntax */
-    }
-</style>
 
 
 
 <body style="background: white">
     <script src="js/bootstrap.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <div class="position-absolute top-50 start-50 translate-middle">
         <div id="players">
             <div id="page1">
-                <label class="form-label">"How many players (Max 6)"</label>
+                <label type="number" max="6" min="0" class="form-label">How many players (Max 6)</label>
                 <input type="number" class="form-control" id="playeramount">
                 <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-primary btn-lg"
                     style="margin-top: 20px; width:350px;">
@@ -66,10 +54,10 @@
                 </div>
             </div>
             <div class="mb-3 form-check" id="checks">
+                <label class="form-check-label" for="jester">Jester</label>
                 <input type="checkbox" class="form-check-input" id="jester">
                 <input id="jesterchance" type="number" min="0" max="100" value="15" style="width: 65px;"
                     class="form-control">
-                <label class="form-check-label" for="jester">Jester</label>
             </div>
             <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg"
                 style="margin-top: 20px; width:350px;">Start Game</p>
@@ -77,13 +65,20 @@
         <div class="position-absolute top-50 start-50 translate-middle"></div>
         <div id="card" class="" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()"
             ontouchstart="mouseDown()" ontouchend="mouseUp()">
-            <div class="" style="background-color: rgb(180, 180, 180);">
+            <div class="" style="">
                 <h1 id="person" class="card-title">Person</h1>
                 <h2 id="role" class="card-text">Role</h2>
+                <h2 id="word" class="card-text">Word</h2>
+                <h2 id="hint" class="card-text">Hint</h2>
                 <p id="demo"></p>
             </div>
         </div>
         <p id="nextbutton" class="btn btn-primary" onclick="next()" style="">Next</p>
+        <div id="startgame" style="margin:300px; display: flex;">
+            <h1 id="starter">Starter</h1>
+            <h1 id="starttext">Start</h1>
+        </div>
+
     </div>
 
 
@@ -101,6 +96,8 @@
         document.getElementById("play").style.display = "none";
         document.getElementById("checks").style.display = "none";
         document.getElementById("nextbutton").style.display = "none";
+        document.getElementById("hint").style.display = "none";
+        document.getElementById("startgame").style.display = "none";
 
         var player0
         var player1
@@ -123,6 +120,8 @@
 
         var role
         var x
+
+        var wordlist = ["apple", "pear", "lemon"]
 
         function start() {
             let i = 0;
@@ -149,6 +148,9 @@
             result = playerlist.filter(word => word.trim().length > 0);
 
             jesterstate = document.getElementById("jester")
+
+            word = wordlist[Math.floor(Math.random() * result.length)];
+            console.log(word)
 
             imposter = result[Math.floor(Math.random() * result.length)];
             console.log("imposter is:")
@@ -179,22 +181,11 @@
             document.getElementById("play").style.display = "none";
             document.getElementById("checks").style.display = "none";
             document.getElementById("page1").style.display = "none";
+            
 
 
-            x = 0;
-            document.getElementById("person").textContent = result[x]
-            role = "";
-            if (result[x] != imposter) {
-                if (result[x] != jester) {
-                    role = "Innocent"
-                }
-                else {
-                    role = "Jester"
-                }
-            }
-            else {
-                role = "Imposter"
-            }
+            x = -1;
+            next()
 
 
 
@@ -204,20 +195,31 @@
         function next() {
             x++;
             document.getElementById("person").textContent = result[x]
+            document.getElementById("word").style.display = "none";
+            document.getElementById("hint").style.display = "none";
             role = "";
             if (x < players) {
                 if (result[x] != imposter) {
                     if (result[x] != jester) {
                         role = "Innocent"
+                        document.getElementById("word").style.display = "block";
                     }
                     else {
                         role = "Jester"
+                        document.getElementById("word").style.display = "block";
                     }
                 }
                 else {
                     role = "Imposter"
+                    document.getElementById("hint").style.display = "block";
                 }
             }
+            else {
+                document.getElementById("startgame").style.display = "block";
+                document.getElementById("nextbutton").style.display = "none";
+                document.getElementById("starter").textContent = result[Math.floor(Math.random() * result.length)];
+            }
+
         }
 
 
@@ -226,9 +228,13 @@
 
         function mouseDown() {
             document.getElementById("role").textContent = role
+            document.getElementById("word").textContent = word
+            document.getElementById("hint").textContent = "hint"
         }
         function mouseUp() {
             document.getElementById("role").textContent = ""
+            document.getElementById("word").textContent = ""
+            document.getElementById("hint").textContent = ""
         }
     </script>
 
