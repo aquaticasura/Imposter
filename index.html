@@ -4,38 +4,64 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="stylesheet.scss">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <title>Imposter</title>
 
 </head>
 
-<body>
+
+
+
+
+<body style="background: white">
     <script src="js/bootstrap.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <div class="position-absolute top-50 start-50 translate-middle">
 
-        <div id="players" class="card" style="width: 20rem;">
-            <div class="mb-3">
-                <label for="player1" class="form-label">Player 1</label>
-                <input class="form-control" id="player1">
-                <label for="player2" class="form-label">Player 2</label>
-                <input class="form-control" id="player2">
-                <label for="player3" class="form-label">Player 3</label>
-                <input class="form-control" id="player3">
-                <label for="player4" class="form-label">Player 4</label>
-                <input class="form-control" id="player4">
-                <label for="player5" class="form-label">Player 5</label>
-                <input class="form-control" id="player5">
-                <p id="play" onmousedown="play()" class="btn btn-primary" style="margin-top: 20px; width: 320px;">Play
-                </p>
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div id="players">
+            <div id="page1">
+                <label class="form-label">How many players</label>
+                <input class="form-control" id="playeramount">
+                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-primary btn-lg"
+                    style="margin-top: 20px; width:350px;">
+                    Continue</p>
             </div>
+            <div id="holder" class="mb-3" style="width:250px; margin:50px">
+
+                <div id="0">
+                    <label for="player1" class="form-label">Player 1</label>
+                    <input class="form-control">
+                </div>
+                <div id="1">
+                    <label for="player2" class="form-label">Player 2</label>
+                    <input class="form-control">
+                </div>
+                <div id="2">
+                    <label for="player3" class="form-label">Player 3</label>
+                    <input class="form-control">
+                </div>
+                <div id="3">
+                    <label for="player4" class="form-label">Player 4</label>
+                    <input class="form-control">
+                </div>
+                <div id="4">
+                    <label for="player5" class="form-label">Player 5</label>
+                    <input class="form-control">
+                </div>
+                <div id="5">
+                    <label for="player5" class="form-label">Player 6</label>
+                    <input class="form-control">
+                </div>
+            </div>
+            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg" style="margin-top: 20px; width:350px;">Start Game</p>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle"></div>
-        <div id="card" class="card" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()" ontouchstart="mouseDown()" ontouchend="mouseUp()">
-            <div class="card-body" style="background-color: rgb(180, 180, 180);">
+        <div id="card" class="" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()"
+            ontouchstart="mouseDown()" ontouchend="mouseUp()">
+            <div class="" style="background-color: rgb(180, 180, 180);">
                 <h5 id="role" class="card-title">Role</h5>
                 <p id="desc" class="card-text">Description</p>
                 <p id="demo"></p>
@@ -43,24 +69,42 @@
             </div>
         </div>
     </div>
-    </div>
+
 
 
 
     <script>
 
         document.getElementById("card").style.display = "none";
-        function play() {
-            console.log("hello world")
-            document.getElementById("players").style.display = "none"
-            document.getElementById("card").style.display = "block";
-            const player1 = document.getElementById('player1').value;
-            const player2 = document.getElementById('player2').value;
-            const player3 = document.getElementById('player3').value;
-            const player4 = document.getElementById('player4').value;
-            const player5 = document.getElementById('player5').value;
+        document.getElementById("0").style.display = "none";
+        document.getElementById("1").style.display = "none";
+        document.getElementById("2").style.display = "none";
+        document.getElementById("3").style.display = "none";
+        document.getElementById("4").style.display = "none";
+        document.getElementById("5").style.display = "none";
+        document.getElementById("play").style.display = "none";
 
-            const players = [player1,player2,player3,player4,player5]
+        function start() {
+            let i = 0;
+            const players = document.getElementById("playeramount").value;
+            while (i < players) {
+                document.getElementById(i).style.display = "block";
+                document.getElementById("play").style.display = "block"
+                i++;
+                console.log("+1")
+            }
+        }
+
+
+        function play() {
+            const players = document.getElementById("playeramount").value
+             while (i < players) {
+                console.log("+1")
+            }
+            document.getElementById("card").style.display = "block";
+
+
+            const players1 = [player1, player2, player3, player4, player5]
             document.getElementById("demo").innerHTML = players[0];
         }
 
