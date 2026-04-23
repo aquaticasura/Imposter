@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="stylesheet.scss">
 
     <title>Imposter</title>
 
@@ -16,19 +16,59 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 id="role" class="card-title">Role</h5>
-                <p id="desc" class="card-text">Description</p>
-                <p id="button" class="btn btn-primary" style="" ontouchstart="mouseDown()" ontouchend="mouseUp()">test</p>
+
+        <div id="players" class="card" style="width: 20rem;">
+            <div class="mb-3">
+                <label for="player1" class="form-label">Player 1</label>
+                <input class="form-control" id="player1">
+                <label for="player2" class="form-label">Player 2</label>
+                <input class="form-control" id="player2">
+                <label for="player3" class="form-label">Player 3</label>
+                <input class="form-control" id="player3">
+                <label for="player4" class="form-label">Player 4</label>
+                <input class="form-control" id="player4">
+                <label for="player5" class="form-label">Player 5</label>
+                <input class="form-control" id="player5">
+                <p id="play" onmousedown="play()" class="btn btn-primary" style="margin-top: 20px; width: 320px;">Play
+                </p>
             </div>
         </div>
+        <div class="position-absolute top-50 start-50 translate-middle"></div>
+        <div id="card" class="card" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()" ontouchstart="mouseDown()" ontouchend="mouseUp()">
+            <div class="card-body" style="background-color: rgb(180, 180, 180);">
+                <h5 id="role" class="card-title">Role</h5>
+                <p id="desc" class="card-text">Description</p>
+                <p id="demo"></p>
+                <p id="button" class="btn btn-primary" style="">test</p>
+            </div>
+        </div>
+    </div>
     </div>
 
 
 
     <script>
+
+        document.getElementById("card").style.display = "none";
+        function play() {
+            console.log("hello world")
+            document.getElementById("players").style.display = "none"
+            document.getElementById("card").style.display = "block";
+            const player1 = document.getElementById('player1').value;
+            const player2 = document.getElementById('player2').value;
+            const player3 = document.getElementById('player3').value;
+            const player4 = document.getElementById('player4').value;
+            const player5 = document.getElementById('player5').value;
+
+            const players = [player1,player2,player3,player4,player5]
+            document.getElementById("demo").innerHTML = players[0];
+        }
+
+
+        const list = ['apple', 'banana', 'cherry', 'date'];
+        const randomItem = list[Math.floor(Math.random() * list.length)];
+        document.getElementById("desc").innerHTML = randomItem;
+
         function mouseDown() {
             document.getElementById("button").style.color = "red";
             document.getElementById("role").textContent = "Imposter"
