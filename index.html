@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheet.scss">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
 
     <title>Imposter</title>
@@ -24,7 +24,7 @@
         <div id="players">
             <div id="page1">
                 <label class="form-label">"How many players (Max 6)"</label>
-                <input class="form-control" id="playeramount">
+                <input type="number" class="form-control" id="playeramount">
                 <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-primary btn-lg"
                     style="margin-top: 20px; width:350px;">
                     Continue</p>
@@ -58,7 +58,8 @@
             </div>
             <div class="mb-3 form-check" id="checks">
                 <input type="checkbox" class="form-check-input" id="jester">
-                <input id="jesterchance" style="width: 50px;" class="form-control">
+                <input id="jesterchance" type="number" min="0" max="100" value="15" style="width: 65px;"
+                    class="form-control">
                 <label class="form-check-label" for="jester">Jester</label>
             </div>
             <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg"
@@ -68,12 +69,12 @@
         <div id="card" class="" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()"
             ontouchstart="mouseDown()" ontouchend="mouseUp()">
             <div class="" style="background-color: rgb(180, 180, 180);">
-                <h5 id="role" class="card-title">Role</h5>
-                <p id="desc" class="card-text">Description</p>
+                <h1 id="person" class="card-title">Person</h1>
+                <h2 id="role" class="card-text">Role</h2>
                 <p id="demo"></p>
-                <p id="button" class="btn btn-primary" style="">test</p>
             </div>
         </div>
+        <p id="nextbutton" class="btn btn-primary" onclick="next()" style="">Next</p>
     </div>
 
 
@@ -90,10 +91,33 @@
         document.getElementById("5").style.display = "none";
         document.getElementById("play").style.display = "none";
         document.getElementById("checks").style.display = "none";
+        document.getElementById("nextbutton").style.display = "none";
+
+        var player0
+        var player1
+        var player2
+        var player3
+        var player4
+        var player5
+
+        var players
+
+        var playerlist
+        var result
+
+        var jesterstate
+        var imposter
+
+        var jesterrandom
+        var jesterchance
+        var jester
+
+        var role
+        var x
 
         function start() {
             let i = 0;
-            const players = document.getElementById("playeramount").value;
+            players = document.getElementById("playeramount").value;
             while (i < players) {
                 document.getElementById(i).style.display = "block";
                 document.getElementById("play").style.display = "block"
@@ -102,31 +126,31 @@
                 console.log("+1")
             }
         }
- 
+
 
         function play() {
-            const player0 = document.getElementById("input0").value;
-            const player1 = document.getElementById("input1").value;
-            const player2 = document.getElementById("input2").value;
-            const player3 = document.getElementById("input3").value;
-            const player4 = document.getElementById("input4").value;
-            const player5 = document.getElementById("input5").value;
+            player0 = document.getElementById("input0").value;
+            player1 = document.getElementById("input1").value;
+            player2 = document.getElementById("input2").value;
+            player3 = document.getElementById("input3").value;
+            player4 = document.getElementById("input4").value;
+            player5 = document.getElementById("input5").value;
 
-            const playerlist = [player0, player1, player2, player3, player4, player5];
-            const result = playerlist.filter(word => word.trim().length > 0);
+            playerlist = [player0, player1, player2, player3, player4, player5];
+            result = playerlist.filter(word => word.trim().length > 0);
 
-            var jesterstate = document.getElementById("jester")
+            jesterstate = document.getElementById("jester")
 
-            const imposter = result[Math.floor(Math.random() * result.length)];
+            imposter = result[Math.floor(Math.random() * result.length)];
+            console.log("imposter is:")
             console.log(imposter)
 
-            const jesterrandom = Math.floor(Math.random() * 100);
-            console.log(jesterrandom)
-            const jesterchance = document.getElementById("jesterchance").value
-            if (jesterrandom <= jesterchance) 
-            {
+            jesterrandom = Math.floor(Math.random() * 100);
+            jesterchance = document.getElementById("jesterchance").value
+            if (jesterrandom <= jesterchance) {
                 console.log("jester enabled")
-                var jester = result[Math.floor(Math.random() * result.length)];
+                jester = result[Math.floor(Math.random() * result.length)];
+                console.log("jester is:")
                 console.log(jester)
                 if (jester == imposter) {
                     jester = result[Math.floor(Math.random() * result.length)];
@@ -134,20 +158,68 @@
                 }
 
             }
+
+            document.getElementById("card").style.display = "block";
+            document.getElementById("nextbutton").style.display = "block";
+            document.getElementById("0").style.display = "none";
+            document.getElementById("1").style.display = "none";
+            document.getElementById("2").style.display = "none";
+            document.getElementById("3").style.display = "none";
+            document.getElementById("4").style.display = "none";
+            document.getElementById("5").style.display = "none";
+            document.getElementById("play").style.display = "none";
+            document.getElementById("checks").style.display = "none";
+            document.getElementById("page1").style.display = "none";
+
+
+            x = 0;
+            document.getElementById("person").textContent = result[x]
+            role = "";
+            if (result[x] != imposter) {
+                if (result[x] != jester) {
+                    role = "Innocent"
+                }
+                else {
+                    role = "Jester"
+                }
+            }
+            else {
+                role = "Imposter"
+            }
+
+
+
         }
 
 
-        const list = ['apple', 'banana', 'cherry', 'date'];
-        const randomItem = list[Math.floor(Math.random() * list.length)];
-        document.getElementById("desc").innerHTML = randomItem;
+        function next() {
+            x++;
+            document.getElementById("person").textContent = result[x]
+            role = "";
+            if (x < players) {
+                if (result[x] != imposter) {
+                    if (result[x] != jester) {
+                        role = "Innocent"
+                    }
+                    else {
+                        role = "Jester"
+                    }
+                }
+                else {
+                    role = "Imposter"
+                }
+            }
+        }
+
+
+
+
 
         function mouseDown() {
-            document.getElementById("button").style.color = "red";
-            document.getElementById("role").textContent = "Imposter"
+            document.getElementById("role").textContent = role
         }
         function mouseUp() {
-            document.getElementById("button").style.color = "blue";
-            document.getElementById("role").textContent = "Role"
+            document.getElementById("role").textContent = ""
         }
     </script>
 
