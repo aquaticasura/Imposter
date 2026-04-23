@@ -23,7 +23,7 @@
     <div class="position-absolute top-50 start-50 translate-middle">
         <div id="players">
             <div id="page1">
-                <label class="form-label">How many players</label>
+                <label class="form-label">"How many players (Max 6)"</label>
                 <input class="form-control" id="playeramount">
                 <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-primary btn-lg"
                     style="margin-top: 20px; width:350px;">
@@ -32,31 +32,37 @@
             <div id="holder" class="mb-3" style="width:250px; margin:50px">
 
                 <div id="0">
-                    <label for="player1" class="form-label">Player 1</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 1</label>
+                    <input id="input0" class="form-control">
                 </div>
                 <div id="1">
-                    <label for="player2" class="form-label">Player 2</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 2</label>
+                    <input id="input1" class="form-control">
                 </div>
                 <div id="2">
-                    <label for="player3" class="form-label">Player 3</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 3</label>
+                    <input id="input2" class="form-control">
                 </div>
                 <div id="3">
-                    <label for="player4" class="form-label">Player 4</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 4</label>
+                    <input id="input3" class="form-control">
                 </div>
                 <div id="4">
-                    <label for="player5" class="form-label">Player 5</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 5</label>
+                    <input id="input4" class="form-control">
                 </div>
                 <div id="5">
-                    <label for="player5" class="form-label">Player 6</label>
-                    <input class="form-control">
+                    <label class="form-label">Player 6</label>
+                    <input id="input5" class="form-control">
                 </div>
             </div>
-            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg" style="margin-top: 20px; width:350px;">Start Game</p>
+            <div class="mb-3 form-check" id="checks">
+                <input type="checkbox" class="form-check-input" id="jester">
+                <input id="jesterchance" style="width: 50px;" class="form-control">
+                <label class="form-check-label" for="jester">Jester</label>
+            </div>
+            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg"
+                style="margin-top: 20px; width:350px;">Start Game</p>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle"></div>
         <div id="card" class="" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()"
@@ -83,6 +89,7 @@
         document.getElementById("4").style.display = "none";
         document.getElementById("5").style.display = "none";
         document.getElementById("play").style.display = "none";
+        document.getElementById("checks").style.display = "none";
 
         function start() {
             let i = 0;
@@ -90,22 +97,43 @@
             while (i < players) {
                 document.getElementById(i).style.display = "block";
                 document.getElementById("play").style.display = "block"
+                document.getElementById("checks").style.display = "block";
                 i++;
                 console.log("+1")
             }
         }
-
+ 
 
         function play() {
-            const players = document.getElementById("playeramount").value
-             while (i < players) {
-                console.log("+1")
+            const player0 = document.getElementById("input0").value;
+            const player1 = document.getElementById("input1").value;
+            const player2 = document.getElementById("input2").value;
+            const player3 = document.getElementById("input3").value;
+            const player4 = document.getElementById("input4").value;
+            const player5 = document.getElementById("input5").value;
+
+            const playerlist = [player0, player1, player2, player3, player4, player5];
+            const result = playerlist.filter(word => word.trim().length > 0);
+
+            var jesterstate = document.getElementById("jester")
+
+            const imposter = result[Math.floor(Math.random() * result.length)];
+            console.log(imposter)
+
+            const jesterrandom = Math.floor(Math.random() * 100);
+            console.log(jesterrandom)
+            const jesterchance = document.getElementById("jesterchance").value
+            if (jesterrandom <= jesterchance) 
+            {
+                console.log("jester enabled")
+                var jester = result[Math.floor(Math.random() * result.length)];
+                console.log(jester)
+                if (jester == imposter) {
+                    jester = result[Math.floor(Math.random() * result.length)];
+                    console.log("rerolling jester")
+                }
+
             }
-            document.getElementById("card").style.display = "block";
-
-
-            const players1 = [player1, player2, player3, player4, player5]
-            document.getElementById("demo").innerHTML = players[0];
         }
 
 
