@@ -138,7 +138,9 @@
         var role
         var x
 
-        var wordlist = ["apple", "pear", "lemon"]
+        var wordlist = ["Lemon"]
+        var hintlist = ["Sour",]
+        var hint
 
         function start() {
             let i = 0;
@@ -166,9 +168,14 @@
             playerlist = [player0, player1, player2, player3, player4, player5];
             result = playerlist.filter(word => word.trim().length > 0);
 
+            var y;
+            y = [Math.floor(Math.random() * wordlist.length)];
+            word = wordlist[y]
+            hint = hintlist[y]
+
             jesterstate = document.getElementById("jester")
 
-            word = wordlist[Math.floor(Math.random() * wordlist.length)];
+
             console.log(word)
 
             imposter = result[Math.floor(Math.random() * result.length)];
@@ -260,7 +267,7 @@
         function mouseDown() {
             document.getElementById("role").textContent = role
             document.getElementById("word").textContent = word
-            document.getElementById("hint").textContent = "hint"
+            document.getElementById("hint").textContent = hint
         }
         function mouseUp() {
             document.getElementById("role").textContent = "Role"
