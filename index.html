@@ -155,6 +155,7 @@
         var loverpartner
         var loverchance
         var lover
+        var loverlist
 
         var jesterrandom
         var jesterchance
@@ -164,69 +165,160 @@
         var x
 
         var wordlist = [
-            "dog", "crown", "pizza", "drone", "forest", "airport", "matrix", "chair", "platypus", "sushi",
-            "laptop", "hurricane", "library", "panda", "book", "camera", "desert", "joker", "sandwich", "flashdrive",
-            "tree", "kangaroo", "cupcake", "tablet", "moon", "bakery", "alien", "window", "rhinoceros", "cheese",
-            "headphones", "cave", "school", "monkey", "bed", "vrheadset", "aurora", "godfather", "carrot", "webcam",
-            "ocean", "sloth", "lasagna", "computer", "fire", "hospital", "coco", "knife", "hedgehog", "caviar",
-            "smartwatch", "thunderstorm", "park", "mouse", "clock", "cellphone", "pond", "forrestgump", "apple", "laserpointer",
-            "snow", "dragonfly", "hummus", "television", "flowers", "zoo", "avengers", "backpack", "bumblebee", "broccoli",
-            "stairs", "ipod", "crystals", "jurassicpark", "milk", "watch", "rain", "elephant", "spaghetti", "monitor",
-            "planet", "hotel", "superman", "pencil", "lizard", "cookies", "keyboard", "cucumber", "jungle", "kitchen",
-            "toystory", "gloves", "fish", "nuggets", "campfire", "apartment", "gorilla", "burger", "helicopter", "canyon",
-            "notebook", "tabletpen", "orange", "blizzard", "clinic", "batman", "backyard", "cat", "taco", "smartphone",
-            "dune", "koala", "donut", "speaker", "garden", "aquarium", "inception", "mirror", "hippopotamus", "butter",
-            "earbuds", "volcano", "classroom", "rabbit", "blanket", "console", "waterfall", "interstellar", "pear", "tripod",
-            "river", "penguin", "ramen", "projector", "island", "museum", "spiderman", "scissors", "owl", "chocolate",
-            "charger", "earthquake", "playground", "hamster", "alarm", "microphone", "reef", "gladiator", "grapes", "pointer",
+            "book", "chair", "knife", "window", "bed", "clock", "backpack", "pencil", "helmet", "fork",
+            "spoon", "plate", "lamp", "desk", "key", "lock", "door", "mirror", "sofa", "blanket",
+            "dog", "cat", "bird", "turtle", "fish", "lizard", "frog", "elephant", "monkey", "mouse",
+            "lion", "tiger", "bear", "wolf", "fox", "deer", "horse", "cow", "sheep", "goat",
+            "pizza", "burger", "sandwich", "apple", "cookies", "milk", "spaghetti", "cheese", "carrot", "bread",
+            "rice", "egg", "steak", "salad", "soup", "banana", "grapes", "orange", "melon", "peach",
+            "phone", "laptop", "computer", "tv", "camera", "tablet", "router", "server", "battery", "screen",
+            "keyboard", "mousepad", "drone", "webcam", "speaker", "monitor", "printer", "scanner", "microphone", "charger",
+            "tree", "forest", "rain", "ocean", "snow", "fire", "stone", "planet", "moon", "desert",
+            "cave", "river", "island", "mountain", "valley", "lake", "waterfall", "hill", "sky", "cloud",
+            "beach", "park", "zoo", "library", "school", "hospital", "hotel", "airport", "city", "village",
+            "market", "restaurant", "cinema", "theater", "stadium", "arena", "office", "factory", "warehouse", "garage",
+            "matrix", "avatar", "joker", "alien", "inception", "gladiator", "frozen", "shrek", "titanic", "rocky",
+            "minions", "up", "cars", "ratatouille", "nemo", "dory", "hercules", "mulan", "tarzan", "aladdin",
 
-            "sofa", "helmet", "fork", "spoon", "plate", "cup", "bottle", "fan", "heater", "lamp",
-            "desk", "drawer", "closet", "door", "roof", "floor", "ceiling", "wall", "key", "lock",
-            "ant", "bee", "wolf", "tiger", "lion", "bear", "fox", "deer", "shark", "whale",
-            "octopus", "crab", "lobster", "seal", "dolphin", "horse", "cow", "sheep", "goat", "pig",
-            "bread", "rice", "pasta", "egg", "bacon", "steak", "salad", "soup", "icecream", "yogurt",
-            "banana", "peach", "plum", "melon", "berry", "lemon", "lime", "mango", "pineapple", "coconut",
-            "printer", "scanner", "router", "modem", "keyboard", "mousepad", "harddrive", "software", "app", "browser",
-            "cloud", "server", "wifi", "bluetooth", "battery", "charger", "screen", "display", "camera", "sensor",
-            "mountain", "valley", "hill", "lake", "river", "stream", "waterfall", "island", "coast", "beach",
-            "sky", "cloud", "wind", "storm", "rainbow", "sun", "sunset", "sunrise", "star", "galaxy",
-            "city", "village", "town", "street", "road", "bridge", "station", "market", "mall", "shop",
-            "restaurant", "cafe", "cinema", "theater", "stadium", "arena", "office", "factory", "warehouse", "garage",
-            "avatar", "titanic", "rocky", "terminator", "gladiator", "inception", "frozen", "moana", "cars", "shrek",
-            "minions", "up", "cinderella", "aladdin", "mulan", "tarzan", "hercules", "nemo", "dory", "ratatouille"
+            "crown", "ring", "necklace", "bracelet", "watch", "belt", "wallet", "glasses", "scarf", "hat",
+            "boots", "sandals", "socks", "jacket", "coat", "shirt", "pants", "shorts", "sweater", "hoodie",
+            "ant", "bee", "butterfly", "spider", "mosquito", "fly", "beetle", "dragonfly", "wasp", "grasshopper",
+            "shark", "whale", "dolphin", "octopus", "crab", "lobster", "seal", "penguin", "seagull", "eagle",
+            "pasta", "noodles", "dumplings", "sushi", "ramen", "curry", "taco", "burrito", "nachos", "fries",
+            "donut", "cake", "cupcake", "brownie", "icecream", "yogurt", "honey", "jam", "butter", "cream",
+            "usb", "harddrive", "software", "app", "browser", "wifi", "bluetooth", "signal", "network", "cloud",
+            "display", "sensor", "lens", "pixel", "code", "data", "file", "folder", "download", "upload",
+            "volcano", "earthquake", "tsunami", "hurricane", "tornado", "blizzard", "storm", "thunder", "lightning", "rainbow",
+            "sunrise", "sunset", "star", "galaxy", "universe", "comet", "asteroid", "orbit", "gravity", "space",
+            "bridge", "tower", "castle", "palace", "temple", "church", "museum", "mall", "shop", "bakery",
+            "cafe", "bar", "club", "schoolyard", "playground", "subway", "station", "port", "harbor", "highway",
+            "batman", "superman", "spiderman", "ironman", "thor", "hulk", "deadpool", "venom", "wolverine", "flash",
+
+            "compass", "map", "binoculars", "telescope", "flashlight", "lantern", "rope", "ladder", "hammer", "screwdriver",
+            "wrench", "drill", "saw", "nail", "bolt", "gear", "engine", "motor", "wheel", "brake",
+            "snake", "crocodile", "alligator", "iguana", "chameleon", "gecko", "cobra", "viper", "python", "anaconda",
+            "turkey", "chicken", "duck", "goose", "peacock", "ostrich", "sparrow", "crow", "raven", "owl",
+            "salmon", "tuna", "shrimp", "anchovy", "sardine", "cod", "trout", "eel", "clam", "oyster",
+            "lettuce", "tomato", "cucumber", "onion", "pepper", "spinach", "broccoli", "corn", "peas", "beans",
+            "avocado", "mango", "pineapple", "coconut", "kiwi", "plum", "pear", "fig", "date", "berry",
+            "router", "modem", "firewall", "encryption", "algorithm", "database", "serverrack", "motherboard", "processor", "gpu",
+            "keyboard", "touchpad", "stylus", "headphones", "earbuds", "speaker", "microchip", "circuit", "voltage", "current",
+            "glacier", "reef", "canyon", "dune", "oasis", "cliff", "plateau", "delta", "lagoon", "marsh",
+            "fog", "mist", "breeze", "wind", "hail", "frost", "dew", "iceberg", "avalanche", "eruption",
+            "schoolbus", "taxi", "train", "tram", "bicycle", "motorcycle", "car", "truck", "van", "scooter",
+            "elevator", "escalator", "stairs", "hallway", "corridor", "room", "kitchen", "bathroom", "bedroom", "garage",
+            "harrypotter", "lotr", "starwars", "jurassicpark", "terminator", "godfather", "forrestgump", "matrix2", "avatar2", "rocky2", "notebook", "whiteboard", "marker", "eraser", "calculator", "ruler", "compass", "protractor", "clipboard", "folder",
+            "envelope", "stamp", "package", "box", "crate", "shelf", "cabinet", "drawerunit", "hanger", "basket",
+            "broom", "mop", "bucket", "vacuum", "detergent", "soap", "shampoo", "towel", "napkin", "tissue",
+            "toothbrush", "toothpaste", "razor", "comb", "brush", "perfume", "deodorant", "mirrorball", "candle", "lighter",
+
+            "hamster", "rabbit", "squirrel", "chipmunk", "hedgehog", "badger", "otter", "beaver", "moose", "buffalo",
+            "panther", "leopard", "cheetah", "hyena", "jackal", "meerkat", "lemur", "orangutan", "chimpanzee", "gorilla",
+            "falcon", "hawk", "vulture", "parrot", "flamingo", "pelican", "heron", "stork", "woodpecker", "kingfisher",
+            "jellyfish", "starfish", "seahorse", "stingray", "squid", "krill", "plankton", "urchin", "coral", "kelp",
+
+            "waffle", "pancake", "omelette", "sausage", "baconstrip", "meatball", "hotdog", "ketchup", "mustard", "mayonnaise",
+            "pickle", "olive", "salsa", "guacamole", "chips", "pretzel", "popcorn", "cereal", "granola", "oatmeal",
+            "espresso", "latte", "cappuccino", "tea", "juice", "smoothie", "soda", "lemonade", "milkshake", "water",
+            "chocolatebar", "marshmallow", "caramel", "toffee", "fudge", "gelato", "sorbet", "pudding", "custard", "jelly",
+
+            "smarttv", "projector", "joystick", "gamepad", "console", "vrcontroller", "smartglass", "fitnessband", "tracker", "gps",
+            "satellite", "antenna", "transmitter", "receiver", "routerbox", "switch", "adapter", "cable", "plug", "socket",
+            "touchscreen", "displaypanel", "backlight", "pixelgrid", "render", "animation", "softwareupdate", "firmware", "debugger", "terminal",
+            "databasequery", "servernode", "cloudsync", "firewallrule", "encryptionkey", "hash", "token", "session", "cookie", "cache",
+
+            "meadow", "prairie", "savanna", "rainforest", "wetland", "tundra", "steppe", "grove", "orchard", "vineyard",
+            "glade", "thicket", "undergrowth", "canopy", "basin", "ridge", "summit", "peak", "crater", "geyser",
+            "spring", "brook", "creek", "tributary", "estuary", "bay", "gulf", "strait", "peninsula", "archipelago",
+            "icecap", "snowfield", "permafrost", "fissure", "fault", "aftershock", "quicksand", "sinkhole", "landslide", "erosion",
+
+            "classroom", "lecturehall", "auditorium", "gymnasium", "lockerroom", "cafeteria", "dormitory", "campus", "playfield", "courtyard",
+            "balcony", "terrace", "rooftop", "basement", "attic", "lobby", "reception", "elevatorhall", "parkinglot", "driveway",
+            "sidewalk", "crosswalk", "intersection", "roundabout", "freeway", "tunnel", "overpass", "underpass", "bridgeway", "railway",
+            "runway", "terminal", "gate", "checkin", "security", "lounge", "boarding", "hangar", "controltower", "airspace",
+
+            "villain", "heroine", "sidekick", "mentor", "wizard", "witch", "dragon", "giant", "ghost", "zombie",
+            "vampire", "werewolf", "robot", "android", "cyborg", "alienqueen", "spaceship", "timewarp", "dimension", "portal",
+            "treasure", "artifact", "relic", "amulet", "scroll", "mapquest", "odyssey", "voyage", "expedition", "adventure",
+            "battle", "duel", "quest", "mission", "escape", "survival", "strategy", "tactics", "victory", "defeat"
         ];
         var hintlist = [
-            "pet", "royal", "fastfood", "fly", "trees", "travel", "simulation", "sit", "weird", "rice",
-            "work", "storm", "books", "bear", "read", "photo", "dry", "villain", "lunch", "storage",
-            "wood", "jump", "sweet", "screen", "space", "bread", "space", "glass", "horn", "dairy",
-            "sound", "dark", "learn", "banana", "sleep", "virtual", "sky", "crime", "orange", "video",
-            "water", "slow", "layers", "work", "hot", "care", "family", "sharp", "spiky", "luxury",
-            "time", "storm", "play", "small", "time", "call", "water", "run", "fruit", "light",
-            "cold", "insect", "dip", "screen", "color", "animals", "heroes", "carry", "buzz", "green",
-            "steps", "music", "shine", "dinosaur", "drink", "time", "wet", "big", "pasta", "screen",
-            "world", "stay", "hero", "write", "tail", "sweet", "type", "green", "trees", "cook",
-            "toys", "hands", "swim", "fried", "burn", "home", "strong", "burger", "fly", "rocks",
-            "write", "draw", "orange", "storm", "care", "hero", "yard", "pet", "mexican", "call",
-            "sand", "cute", "sweet", "sound", "plants", "fish", "dream", "reflect", "big", "spread",
-            "sound", "lava", "learn", "hop", "warm", "play", "fall", "space", "fruit", "stable",
-            "flow", "cold", "noodle", "light", "water", "history", "hero", "cut", "night", "sweet",
-            "power", "shake", "fun", "small", "wake", "voice", "coral", "fight", "fruit", "aim",
+            "read", "sit", "cut", "glass", "sleep", "time", "carry", "write", "safety", "eat",
+            "eat", "eat", "light", "work", "open", "secure", "entry", "reflect", "sit", "warm",
+            "pet", "pet", "fly", "slow", "water", "reptile", "jump", "big", "banana", "small",
+            "king", "stripe", "wild", "pack", "sly", "forest", "ride", "farm", "wool", "horn",
+            "slice", "fastfood", "lunch", "fruit", "sweet", "drink", "pasta", "dairy", "vegetable", "grain",
+            "grain", "breakfast", "meat", "green", "hot", "yellow", "fruit", "citrus", "sweet", "soft",
+            "call", "work", "work", "watch", "photo", "screen", "internet", "host", "power", "display",
+            "type", "move", "fly", "video", "sound", "view", "print", "scan", "voice", "charge",
+            "wood", "trees", "water", "water", "cold", "hot", "rock", "space", "night", "dry",
+            "dark", "flow", "land", "high", "low", "water", "fall", "small", "above", "soft",
+            "sand", "play", "animals", "books", "learn", "care", "stay", "travel", "busy", "quiet",
+            "buy", "food", "movie", "stage", "sports", "events", "work", "build", "store", "car",
+            "simulation", "blue", "villain", "space", "dream", "arena", "cold", "ogre", "ship", "fight",
+            "yellow", "float", "race", "cook", "fish", "forget", "strong", "china", "jungle", "magic",
 
-            "sit", "safety", "eat", "eat", "eat", "drink", "drink", "cool", "heat", "light",
-            "work", "store", "store", "entry", "top", "ground", "up", "side", "open", "secure",
-            "tiny", "buzz", "wild", "stripe", "king", "wild", "sly", "forest", "ocean", "giant",
-            "arms", "shell", "claws", "sea", "smart", "ride", "farm", "wool", "horn", "mud",
-            "slice", "grain", "noodle", "breakfast", "meat", "green", "hot", "cold", "sweet", "smooth",
-            "yellow", "soft", "purple", "big", "small", "sour", "green", "tropical", "spiky", "hard",
-            "print", "scan", "network", "internet", "type", "rest", "storage", "program", "mobile", "web",
-            "cloud", "host", "signal", "wireless", "power", "charge", "view", "screen", "photo", "detect",
-            "high", "low", "small", "water", "flow", "stream", "fall", "land", "edge", "sand",
-            "above", "soft", "air", "storm", "color", "hot", "evening", "morning", "night", "space",
-            "busy", "small", "quiet", "path", "drive", "cross", "train", "buy", "shop", "store",
-            "food", "coffee", "movie", "stage", "sports", "events", "work", "build", "storage", "car",
-            "blue", "ship", "boxer", "robot", "arena", "dream", "snow", "ocean", "cars", "ogre",
-            "yellow", "float", "glass", "magic", "china", "jungle", "strong", "fish", "forget", "cook"
-        ];
+            "royal", "finger", "neck", "wrist", "time", "waist", "money", "vision", "warm", "head",
+            "feet", "feet", "warm", "cold", "upper", "legs", "short", "warm", "warm", "warm",
+            "tiny", "buzz", "color", "web", "bite", "annoy", "hard", "color", "sting", "jump",
+            "ocean", "giant", "smart", "arms", "shell", "claws", "sea", "cold", "coast", "sky",
+            "noodle", "noodle", "dumpling", "rice", "noodle", "spice", "mexican", "wrap", "corn", "fried",
+            "sweet", "sweet", "sweet", "sweet", "cold", "smooth", "sweet", "spread", "dairy", "fat",
+            "plug", "storage", "program", "mobile", "web", "signal", "wireless", "wave", "connect", "sky",
+            "screen", "detect", "glass", "dot", "logic", "info", "doc", "store", "save", "send",
+            "lava", "shake", "wave", "storm", "spin", "cold", "storm", "boom", "flash", "color",
+            "rise", "set", "night", "space", "all", "tail", "rock", "path", "pull", "void",
+            "cross", "tall", "royal", "royal", "worship", "faith", "history", "shop", "buy", "bread",
+            "coffee", "drink", "dance", "kids", "fun", "train", "stop", "ship", "dock", "road",
+            "hero", "hero", "hero", "hero", "god", "strong", "anti", "dark", "claws", "speed",
+
+            "direction", "guide", "see", "far", "light", "light", "climb", "step", "hit", "turn",
+            "turn", "power", "cut", "hold", "fix", "join", "rotate", "drive", "roll", "stop",
+            "slither", "teeth", "teeth", "lizard", "color", "stick", "venom", "venom", "coil", "giant",
+            "feast", "farm", "water", "water", "color", "big", "small", "city", "dark", "night",
+            "pink", "sea", "small", "tiny", "silver", "fish", "fresh", "snake", "shell", "shell",
+            "green", "red", "green", "layer", "spice", "leaf", "green", "yellow", "green", "green",
+            "spread", "sweet", "tropical", "hard", "brown", "small", "purple", "green", "sweet", "tiny",
+            "internet", "connect", "protect", "secret", "math", "data", "rack", "board", "brain", "graphics",
+            "type", "touch", "draw", "sound", "listen", "listen", "chip", "path", "power", "flow",
+            "ice", "coral", "deep", "sand", "water", "edge", "flat", "river", "calm", "wet",
+            "cloud", "light", "wind", "air", "ice", "cold", "morning", "ice", "slide", "blast",
+            "yellow", "ride", "track", "city", "ride", "fast", "drive", "haul", "carry", "small",
+            "lift", "move", "steps", "hall", "path", "space", "cook", "wash", "sleep", "park",
+            "magic", "ring", "space", "dino", "robot", "crime", "run", "simulation", "blue", "fight", "write", "draw", "ink", "erase", "math", "measure", "circle", "angle", "hold", "store",
+            "mail", "send", "ship", "container", "wood", "hold", "store", "slide", "clothes", "carry",
+            "clean", "clean", "water", "suction", "clean", "wash", "hair", "dry", "wipe", "soft",
+            "teeth", "paste", "shave", "hair", "hair", "smell", "fresh", "dance", "light", "fire",
+
+            "small", "hop", "tree", "tiny", "spiky", "dig", "water", "dam", "giant", "herd",
+            "black", "spots", "fast", "laugh", "wild", "alert", "tree", "orange", "smart", "strong",
+            "fast", "hunt", "dead", "talk", "pink", "fish", "tall", "long", "peck", "dive",
+            "sting", "shape", "tiny", "flat", "ink", "tiny", "tiny", "spike", "reef", "plant",
+
+            "breakfast", "flat", "egg", "meat", "crispy", "round", "bun", "red", "yellow", "spread",
+            "sour", "fruit", "dip", "green", "crunch", "twist", "movie", "breakfast", "grain", "warm",
+            "coffee", "coffee", "coffee", "hot", "drink", "blend", "fizz", "fresh", "thick", "clear",
+            "sweet", "soft", "sweet", "sweet", "sweet", "cold", "cold", "soft", "cream", "jiggle",
+
+            "screen", "light", "play", "control", "play", "virtual", "glass", "health", "track", "map",
+            "orbit", "signal", "send", "receive", "internet", "switch", "connect", "wire", "power", "hole",
+            "touch", "screen", "light", "dots", "draw", "motion", "update", "system", "fix", "command",
+            "data", "node", "cloud", "block", "secure", "code", "access", "login", "track", "store",
+
+            "grass", "flat", "wild", "wet", "cold", "dry", "trees", "farm", "fruit", "wine",
+            "clear", "dense", "low", "top", "low", "high", "top", "top", "hole", "hot",
+            "water", "small", "small", "river", "mix", "coast", "water", "narrow", "land", "islands",
+            "ice", "snow", "frozen", "crack", "shift", "shake", "sand", "hole", "slide", "wear",
+
+            "learn", "talk", "speak", "sports", "change", "eat", "sleep", "study", "play", "open",
+            "view", "sit", "top", "dark", "storage", "enter", "welcome", "wait", "park", "drive",
+            "walk", "cross", "meet", "circle", "fast", "dark", "over", "under", "cross", "train",
+            "plane", "wait", "door", "check", "scan", "relax", "enter", "plane", "control", "sky",
+
+            "evil", "hero", "help", "guide", "magic", "magic", "fire", "big", "spirit", "undead",
+            "blood", "howl", "metal", "human", "hybrid", "leader", "ship", "time", "space", "door",
+            "gold", "old", "old", "power", "paper", "journey", "epic", "sea", "travel", "explore",
+            "fight", "duel", "goal", "task", "run", "alive", "plan", "plan", "win", "lose"];
         var hint
 
         function start() {
@@ -301,16 +393,20 @@
                 console.log(lover)
                 loverpartner = result[Math.floor(Math.random() * result.length)];
                 if (loverpartner == lover) {
-                    loverpartner = result[Math.floor(Math.random() * result.length)];
+                    loverlist = result.filter(item => item !== lover)
+                    loverpartner = loverlist[Math.floor(Math.random() * loverlist.length)];
                     console.log("rerolling lover partner");
+                    console.log(loverpartner)
                 }
                 if (lover == imposter) {
                     jester = result[Math.floor(Math.random() * result.length)];
                     console.log("rerolling lover")
+                    console.log(lover)
                 }
                 else if (lover == jester) {
                     lover = result[Math.floor(Math.random() * result.length)];
                     console.log("rerolling lover")
+                    console.log(lover)
                 }
 
             }
