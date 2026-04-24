@@ -38,35 +38,35 @@
                 <label type="number" max="6" min="0" class="form-label" style="color:white;">How many players (Max
                     6)</label>
                 <input type="number" class="form-control" id="playeramount">
-                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-danger btn-lg"
-                    style="margin-top: 20px; width:350px;">
+                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg"
+                    style="margin-top: 20px; width:350px; background-color:#282828; color:white;">
                     Continue</p>
             </div>
             <div id="holder" class="mb-3" style="width:250px; margin:50px;">
 
                 <div id="0">
                     <label class="form-label">Player 1</label>
-                    <input id="input0" class="form-control">
+                    <input id="input0" class="form-control" >
                 </div>
                 <div id="1">
                     <label class="form-label">Player 2</label>
-                    <input id="input1" class="form-control">
+                    <input id="input1" class="form-control" >
                 </div>
                 <div id="2">
                     <label class="form-label">Player 3</label>
-                    <input id="input2" class="form-control">
+                    <input id="input2" class="form-control" >
                 </div>
                 <div id="3">
                     <label class="form-label">Player 4</label>
-                    <input id="input3" class="form-control">
+                    <input id="input3" class="form-control" >
                 </div>
                 <div id="4">
                     <label class="form-label">Player 5</label>
-                    <input id="input4" class="form-control">
+                    <input id="input4" class="form-control" >
                 </div>
                 <div id="5">
                     <label class="form-label">Player 6</label>
-                    <input id="input5" class="form-control">
+                    <input id="input5" class="form-control" >
                 </div>
             </div>
             <div class="mb-3 form-check" id="checks">
@@ -74,9 +74,14 @@
                 <input type="checkbox" on class="form-check-input-danger" id="jester">
                 <input id="jesterchance" type="number" min="0" max="100" value="15" style="width: 65px;"
                     class="form-control" onformchange="handleCheck(this)">
+
+                <label class="form-check-label" for="lover">Lover</label>
+                <input type="checkbox" on class="form-check-input-danger" id="lover">
+                <input id="loverchance" type="number" min="0" max="100" value="15" style="width: 65px;"
+                    class="form-control" onformchange="handleCheck(this)">
             </div>
-            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-danger btn-lg"
-                style="margin-top: 20px; width:350px;">Start Game</p>
+            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
+                style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Start Game</p>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle"></div>
         <div id="card" class="prevent-select"
@@ -86,18 +91,23 @@
                 <h1 id="person" class="card-text">Person</h1>
                 <h4 id="roleis">Your Role is:</h4>
                 <h1 id="role" class="card-text">Role</h2>
-                <h4 id="wordis">Your word is:</h4>
-                <h1 id="word" class="card-text">Word</h2>
-                <h4 id="hintis">Your hint is:</h4>
-                <h1 id="hint" class="card-text">Hint</h2>
+                    <div id="loverdiv" style="text-align: center;">
+                        <h4 id="lovertext">Your lover is:</h4>
+                        <h1 id="loverpartner">Lover</h1>
+                    </div>
+                    <h4 id="wordis">Your word is:</h4>
+                    <h1 id="word" class="card-text">Word</h2>
+                        <h4 id="hintis">Your hint is:</h4>
+                        <h1 id="hint" class="card-text">Hint</h2>
             </div>
         </div>
-        <p id="nextbutton" class="btn btn-danger" onclick="next()" style="">Next</p>
+        <p id="nextbutton" style="margin-top: 20px; width:350px; background-color:#282828; color:white;" class="btn"
+            onclick="next()">Next</p>
         <div id="startgame" style="padding: 20px; border-radius: 20px; background-color:#181818; text-align: center;">
             <h1 id="starter">Starter</h1>
             <h1 id="starttext">starts</h1>
-            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-danger btn-lg"
-                style="margin-top: 20px; width:350px;">Play Again</p>
+            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
+                style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Play Again</p>
         </div>
 
     </div>
@@ -121,6 +131,8 @@
         document.getElementById("hint").style.display = "none";
         document.getElementById("startgame").style.display = "none";
         document.getElementById("jesterchance").style.display = "none";
+        document.getElementById("loverchance").style.display = "none";
+        document.getElementById("loverdiv").style.display = "none";
 
         var player0
         var player1
@@ -136,6 +148,11 @@
 
         var jesterstate
         var imposter
+
+        var loverrandom
+        var loverpartner
+        var loverchance
+        var lover
 
         var jesterrandom
         var jesterchance
@@ -213,6 +230,9 @@
         function start() {
             let i = 0;
             players = document.getElementById("playeramount").value;
+            if (players <= 0) {
+                players = 2;
+            }
             document.getElementById("holder").style.display = "block";
             document.getElementById("page1").style.display = "none";
             while (i < players) {
@@ -242,6 +262,7 @@
             hint = hintlist[y]
 
             jesterstate = document.getElementById("jester")
+            loverstate = document.getElementById("lover")
 
 
             console.log(word)
@@ -249,17 +270,48 @@
             imposter = result[Math.floor(Math.random() * result.length)];
             console.log("imposter is:")
             console.log(imposter)
+
+
             if (jesterstate.checked) {
                 jesterrandom = Math.floor(Math.random() * 100);
                 jesterchance = document.getElementById("jesterchance").value
                 if (jesterrandom <= jesterchance) {
                     console.log("jester enabled")
                     jester = result[Math.floor(Math.random() * result.length)];
+
                     console.log("jester is:")
                     console.log(jester)
                     if (jester == imposter) {
                         jester = result[Math.floor(Math.random() * result.length)];
                         console.log("rerolling jester")
+                    }
+                    else if (jester == lover) {
+                        jester = result[Math.floor(Math.random() * result.length)];
+                        console.log("rerolling jester")
+                    }
+
+                }
+            }
+            if (loverstate.checked) {
+                loverrandom = Math.floor(Math.random() * 100);
+                loverchance = document.getElementById("loverchance").value
+                if (loverrandom <= loverchance) {
+                    console.log("lover enabled")
+                    lover = result[Math.floor(Math.random() * result.length)];
+                    console.log("lover is:")
+                    console.log(lover)
+                    loverpartner = result[Math.floor(Math.random() * result.length)];
+                    if (loverpartner == lover) {
+                        loverpartner = result[Math.floor(Math.random() * result.length)];
+                        console.log("rerolling lover partner");
+                    }
+                    if (lover == imposter) {
+                        jester = result[Math.floor(Math.random() * result.length)];
+                        console.log("rerolling lover")
+                    }
+                    else if (lover == jester) {
+                        lover = result[Math.floor(Math.random() * result.length)];
+                        console.log("rerolling lover")
                     }
 
                 }
@@ -303,8 +355,14 @@
             if (x < players) {
                 if (result[x] != imposter) {
                     if (result[x] != jester) {
-                        role = "Innocent"
-                        document.getElementById("word").style.display = "block";
+                        if (result[x] != lover) {
+                            role = "Innocent"
+                            document.getElementById("word").style.display = "block";
+                        }
+                        else {
+                            role = "Lover"
+                            document.getElementById("word").style.display = "block";
+                        }
                     }
                     else {
                         role = "Jester"
@@ -325,15 +383,26 @@
 
         }
 
-        const checkbox = document.getElementById('jester');
+        const jestbox = document.getElementById('jester');
 
-        checkbox.addEventListener('change', (event) => {
+        jestbox.addEventListener('change', (event) => {
             if (event.target.checked) {
                 document.getElementById("jesterchance").style.display = "block";
             } else {
                 document.getElementById("jesterchance").style.display = "none";
             }
         });
+
+        const loverbox = document.getElementById('lover');
+
+        loverbox.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                document.getElementById("loverchance").style.display = "block";
+            } else {
+                document.getElementById("loverchance").style.display = "none";
+            }
+        });
+
 
 
 
@@ -359,11 +428,20 @@
                 document.getElementById("word").style.color = "#B8FF78"
                 document.getElementById("wordis").style.display = "block"
             }
+            else if (role == "Lover") {
+                document.getElementById("role").style.color = "#FF29AB"
+                document.getElementById("word").style.color = "#B8FF78"
+                document.getElementById("wordis").style.display = "block"
+                document.getElementById("loverdiv").style.display = "block";
+                document.getElementById("loverpartner").textContent = loverpartner;
+                document.getElementById("loverpartner").style.color = "#FF29AB";
+            }
         }
         function mouseUp() {
             document.getElementById("hintis").style.display = "none"
             document.getElementById("roleis").style.display = "none"
             document.getElementById("wordis").style.display = "none"
+            document.getElementById("loverdiv").style.display = "none";
             document.getElementById("role").textContent = "Role"
             document.getElementById("word").textContent = "Word"
             document.getElementById("hint").textContent = "Word"
