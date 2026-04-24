@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
 
-    <title>Telephony</title>
+    <title>Imposter</title>
 
 </head>
 
@@ -32,23 +32,24 @@
 <body style="background: #121212; color:white;">
     <script src="js/bootstrap.js"></script>
 
+    <p id="help" style="text-align: center; margin-top: 30px;">Hello</p>
     <div class="position-absolute top-50 start-50 translate-middle">
         <div id="players" style="padding:20px; border-radius: 25px; background-color:#181818;">
             <div id="startpage">
-                <p id="telephony" onmousedown="telephony()" ontouchstart="telephony()" class="btn btn-lg"
-                    style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Telephony</p>
+                <p id="imposter" onmousedown="imposter()" ontouchstart="imposter()" class="btn btn-lg"
+                    style="margin-top: 10px; width:315px; background-color:#282828; color:white;">Imposter</p>
                 <p id="mafia" class="btn btn-lg"
-                    style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Mafia</p>
+                    style="margin-top: 10px; width:315px; background-color:#282828; color:white;">Mafia</p>
             </div>
             <div id="playerpage">
-                <label type="number" max="6" min="0" class="form-label" style="color:white;">How many players (Max
+                <label type="number" max="8" min="0" class="form-label" style="color:white;">How many players (Max
                     8)</label>
                 <input type="number" class="form-control" id="playeramount">
                 <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg"
-                    style="margin-top: 20px; width:350px; background-color:#282828; color:white;">
+                    style="margin-top: 20px; width:315px; background-color:#282828; color:white;">
                     Continue</p>
             </div>
-            <div id="holder" class="mb-3" style="width:250px; margin:50px;">
+            <div id="holder" class="mb-3 mx-auto" style="width:250px;">
 
                 <div id="0">
                     <label class="form-label">Player 1</label>
@@ -82,7 +83,7 @@
                     <label class="form-label">Player 8</label>
                     <input id="input7" class="form-control">
                 </div>
-                <p id="rolelist" onmousedown="checks()" ontouchstart="checks()" class="btn btn-lg"
+                <p id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg"
                     style="margin-top: 20px; width:250px; background-color:#282828; color:white;">
                     Roles</p>
             </div>
@@ -112,7 +113,8 @@
                 </div>
             </div>
             <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
-                style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Start Game</p>
+                style="margin-top: 20px; width:315px; margin:25px; background-color:#282828; color:white;">Start Game
+            </p>
         </div>
 
         <div class="position-absolute top-50 start-50 translate-middle"></div>
@@ -127,27 +129,35 @@
                         <h4 id="lovertext">Your lover is:</h4>
                         <h1 id="loverpartner">Lover</h1>
                     </div>
+                    <div id="detectiveoverview" style="text-align: center;">
+                        <h4 id="demo1" class="card-text">Analysis:</h4>
+                        <h5 id="detective1" class="">Jesters</h5>
+                        <h5 id="detective2" class="">Prosecutors</h5>
+                        <h5 id="detective3" class="">Lover</h5>
+                    </div>
+                    <div id="prosecutordiv" style="text-align: center;">
+                        <h4 id="targetis" class="card-text">Your target is:</h4>
+                        <h5 id="target" class="">Target</h5>
+                    </div>
                     <h4 id="wordis">Your word is:</h4>
                     <h1 id="word" class="card-text">Word</h2>
                         <h4 id="hintis">Your hint is:</h4>
                         <h1 id="hint" class="card-text">Hint</h2>
-                            <div id="detectiveoverview" style="text-align: center;">
-                                <h4 id="demo1" class="card-text">Analysis:</h4>
-                                <h5 id="detective1" class="card-text">Jesters</h5>
-                                <h5 id="detective2" class="card-text">Prosecutors</h5>
-                                <h5 id="detective3" class="card-text">Lover</h5>
-                            </div>
+
 
 
             </div>
         </div>
-        <p id="nextbutton" style="margin-top: 20px; width:350px; background-color:#282828; color:white;" class="btn"
-            onclick="next()">Next</p>
+        <p id="nextbutton" class="btn btn-lg"
+            style="margin-top: 25px; width:350px; background-color:#282828; color:white;" class="btn" onclick="next()">
+            Next</p>
         <div id="startgame" style="padding: 20px; border-radius: 20px; background-color:#181818; text-align: center;">
             <h1 id="starter">Starter</h1>
             <h1 id="starttext">starts</h1>
+            <p id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg"
+                style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Vote</p>
             <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
-                style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Play Again</p>
+                style=" width:350px; background-color:#282828; color:white;">Play Again</p>
         </div>
 
     </div>
@@ -167,6 +177,7 @@
         document.getElementById("5").style.display = "none";
         document.getElementById("6").style.display = "none";
         document.getElementById("7").style.display = "none";
+        document.getElementById("help").style.display = "none";
         document.getElementById("play").style.display = "none";
         document.getElementById("checks").style.display = "none";
         document.getElementById("nextbutton").style.display = "none";
@@ -174,6 +185,7 @@
         document.getElementById("startgame").style.display = "none";
         document.getElementById("loverdiv").style.display = "none";
         document.getElementById("detectiveoverview").style.display = "none";
+        document.getElementById("prosecutordiv").style.display = "none";
 
         var player0
         var player1
@@ -206,6 +218,8 @@
         var prosecutorrandom
         var prosecutorchance
         var prosecutor
+        var target
+        var targetlist;
 
         var role
         var x
@@ -378,7 +392,6 @@
             while (i < players) {
                 document.getElementById(i).style.display = "block";
                 document.getElementById("play").style.display = "block"
-                //document.getElementById("checks").style.display = "block";
                 i++;
                 console.log("+1")
             }
@@ -392,8 +405,10 @@
             player3 = document.getElementById("input3").value;
             player4 = document.getElementById("input4").value;
             player5 = document.getElementById("input5").value;
+            player6 = document.getElementById("input6").value;
+            player7 = document.getElementById("input7").value;
 
-            playerlist = [player0, player1, player2, player3, player4, player5];
+            playerlist = [player0, player1, player2, player3, player4, player5, player6, player7];
             result = playerlist.filter(word => word.trim().length > 0);
             rolelist = result
 
@@ -455,6 +470,9 @@
                 //remove the role from the list
                 rolelist = rolelist.filter(item => item !== prosecutor)
 
+                targetlist = result.filter(item => item !== prosecutor)
+                target = targetlist[Math.floor(Math.random() * targetlist.length)];
+
             }
 
 
@@ -468,6 +486,8 @@
             document.getElementById("3").style.display = "none";
             document.getElementById("4").style.display = "none";
             document.getElementById("5").style.display = "none";
+            document.getElementById("6").style.display = "none";
+            document.getElementById("7").style.display = "none";
             document.getElementById("play").style.display = "none";
             document.getElementById("checks").style.display = "none";
             document.getElementById("playerpage").style.display = "none";
@@ -481,6 +501,15 @@
             next()
         }
 
+        function checks() {
+            var element = document.getElementById("checks")
+            if (element.style.display == "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none"
+
+            }
+        }
 
         function next() {
             x++;
@@ -532,80 +561,88 @@
 
         }
 
-        function checks() {
-            document.getElementById("checks").style.display = "block"
+        function vote() {
+            document.getElementById("startgame").style.display = "none"
         }
 
-        function telephony() {
+        function imposter() {
             document.getElementById("startpage").style.display = "none"
             document.getElementById("playerpage").style.display = "block"
         }
 
 
         function mouseDown() {
+            document.getElementById("word").style.color = "#B8FF78"
+            document.getElementById("help").style.display = "block";
             document.getElementById("role").textContent = role
             document.getElementById("word").textContent = word
             document.getElementById("hint").textContent = hint
             document.getElementById("roleis").style.display = "block"
             if (role == "Innocent") {
                 document.getElementById("role").style.color = "#2BE7FF"
-                document.getElementById("word").style.color = "#B8FF78"
                 document.getElementById("wordis").style.display = "block"
+                document.getElementById("help").textContent = "Find the Imposter and vote them out.";
             }
             else if (role == "Imposter") {
                 document.getElementById("role").style.color = "#B50000"
                 document.getElementById("hint").style.color = "#750000"
                 document.getElementById("hintis").style.display = "block"
+                document.getElementById("help").textContent = "Deceive the others and figure out the word.";
             }
             else if (role == "Jester") {
                 document.getElementById("role").style.color = "Pink"
-                document.getElementById("word").style.color = "#B8FF78"
                 document.getElementById("wordis").style.display = "block"
+                document.getElementById("help").textContent = "Fool the others and make them vote you out.";
             }
             else if (role == "Lover") {
                 document.getElementById("role").style.color = "#FF29AB"
-                document.getElementById("word").style.color = "#B8FF78"
                 document.getElementById("wordis").style.display = "block"
                 document.getElementById("loverdiv").style.display = "block";
                 document.getElementById("loverpartner").textContent = loverpartner;
                 document.getElementById("loverpartner").style.color = "#FF29AB";
+                document.getElementById("help").textContent = "Protect your lover at any cost, if they lose you lose.";
             }
             else if (role == "Detective") {
-                document.getElementById("role").style.color = "Blue"
-                document.getElementById("word").style.color = "#B8FF78"
+                document.getElementById("detective1").style.color = "#00459E"
+                document.getElementById("detective2").style.color = "#00459E"
+                document.getElementById("detective3").style.color = "#00459E"
+                document.getElementById("role").style.color = "#006DFF"
                 document.getElementById("wordis").style.display = "block";
                 document.getElementById("detectiveoverview").style.display = "block";
+                document.getElementById("help").textContent = "Use your detective skills to find the imposter.";
                 if (jester != null) {
                     document.getElementById("detective1").textContent = "One Jester"
-                    document.getElementById("detective1").style.color = "Pink"
+
                 }
                 else {
                     document.getElementById("detective1").textContent = ""
                 }
                 if (prosecutor != null) {
                     document.getElementById("detective2").textContent = "One Prosecutor"
-                    document.getElementById("detective2").style.color = "Yellow"
-
                 }
                 else {
                     document.getElementById("detective2").textContent = ""
                 }
                 if (lover != null) {
                     document.getElementById("detective3").textContent = "One Lover"
-                    document.getElementById("detective3").style.color = "#FF29AB"
                 }
                 else {
                     document.getElementById("detective3").textContent = ""
                 }
             }
             else if (role == "Prosecutor") {
-                document.getElementById("role").style.color = "Yellow"
-                document.getElementById("word").style.color = "#B8FF78"
+                document.getElementById("role").style.color = "#FFEA00"
+                document.getElementById("target").style.color = "#CFBA00";
+                document.getElementById("prosecutordiv").style.display = "block";
                 document.getElementById("wordis").style.display = "block";
+                document.getElementById("help").textContent = "Get your target voted out.";
+                document.getElementById("target").textContent = target;
             }
 
         }
         function mouseUp() {
+            document.getElementById("prosecutordiv").style.display = "none";
+            document.getElementById("help").style.display = "none";
             document.getElementById("hintis").style.display = "none"
             document.getElementById("roleis").style.display = "none"
             document.getElementById("wordis").style.display = "none"
