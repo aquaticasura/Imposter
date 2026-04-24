@@ -79,19 +79,25 @@
                 style="margin-top: 20px; width:350px;">Start Game</p>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle"></div>
-        <div id="card" class="prevent-select" style="width:auto; margin:5px; padding: 50px; border-radius: 20px; background-color:#181818;"
+        <div id="card" class="prevent-select"
+            style="width:auto; margin:5px; padding: 50px; border-radius: 20px; background-color:#181818;"
             onmousedown="mouseDown()" onmouseup="mouseUp()" ontouchstart="mouseDown()" ontouchend="mouseUp()">
             <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
                 <h1 id="person" class="card-text">Person</h1>
+                <h4 id="roleis">Your Role is:</h4>
                 <h1 id="role" class="card-text">Role</h2>
-                    <h1 id="word" class="card-text">Word</h2>
-                        <h1 id="hint" class="card-text">Hint</h2>
+                <h4 id="wordis">Your word is:</h4>
+                <h1 id="word" class="card-text">Word</h2>
+                <h4 id="hintis">Your hint is:</h4>
+                <h1 id="hint" class="card-text">Hint</h2>
             </div>
         </div>
         <p id="nextbutton" class="btn btn-danger" onclick="next()" style="">Next</p>
-        <div id="startgame" style="padding: 50px; border-radius: 20px; background-color:#181818;">
+        <div id="startgame" style="padding: 20px; border-radius: 20px; background-color:#181818; text-align: center;">
             <h1 id="starter">Starter</h1>
-            <h1 id="starttext">Start</h1>
+            <h1 id="starttext">starts</h1>
+            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-danger btn-lg"
+                style="margin-top: 20px; width:350px;">Play Again</p>
         </div>
 
     </div>
@@ -138,8 +144,70 @@
         var role
         var x
 
-        var wordlist = ["Lemon"]
-        var hintlist = ["Sour",]
+        var wordlist = [
+            "dog", "crown", "pizza", "drone", "forest", "airport", "matrix", "chair", "platypus", "sushi",
+            "laptop", "hurricane", "library", "panda", "book", "camera", "desert", "joker", "sandwich", "flashdrive",
+            "tree", "kangaroo", "cupcake", "tablet", "moon", "bakery", "alien", "window", "rhinoceros", "cheese",
+            "headphones", "cave", "school", "monkey", "bed", "vrheadset", "aurora", "godfather", "carrot", "webcam",
+            "ocean", "sloth", "lasagna", "computer", "fire", "hospital", "coco", "knife", "hedgehog", "caviar",
+            "smartwatch", "thunderstorm", "park", "mouse", "clock", "cellphone", "pond", "forrestgump", "apple", "laserpointer",
+            "snow", "dragonfly", "hummus", "television", "flowers", "zoo", "avengers", "backpack", "bumblebee", "broccoli",
+            "stairs", "ipod", "crystals", "jurassicpark", "milk", "watch", "rain", "elephant", "spaghetti", "monitor",
+            "planet", "hotel", "superman", "pencil", "lizard", "cookies", "keyboard", "cucumber", "jungle", "kitchen",
+            "toystory", "gloves", "fish", "nuggets", "campfire", "apartment", "gorilla", "burger", "helicopter", "canyon",
+            "notebook", "tabletpen", "orange", "blizzard", "clinic", "batman", "backyard", "cat", "taco", "smartphone",
+            "dune", "koala", "donut", "speaker", "garden", "aquarium", "inception", "mirror", "hippopotamus", "butter",
+            "earbuds", "volcano", "classroom", "rabbit", "blanket", "console", "waterfall", "interstellar", "pear", "tripod",
+            "river", "penguin", "ramen", "projector", "island", "museum", "spiderman", "scissors", "owl", "chocolate",
+            "charger", "earthquake", "playground", "hamster", "alarm", "microphone", "reef", "gladiator", "grapes", "pointer",
+
+            "sofa", "helmet", "fork", "spoon", "plate", "cup", "bottle", "fan", "heater", "lamp",
+            "desk", "drawer", "closet", "door", "roof", "floor", "ceiling", "wall", "key", "lock",
+            "ant", "bee", "wolf", "tiger", "lion", "bear", "fox", "deer", "shark", "whale",
+            "octopus", "crab", "lobster", "seal", "dolphin", "horse", "cow", "sheep", "goat", "pig",
+            "bread", "rice", "pasta", "egg", "bacon", "steak", "salad", "soup", "icecream", "yogurt",
+            "banana", "peach", "plum", "melon", "berry", "lemon", "lime", "mango", "pineapple", "coconut",
+            "printer", "scanner", "router", "modem", "keyboard", "mousepad", "harddrive", "software", "app", "browser",
+            "cloud", "server", "wifi", "bluetooth", "battery", "charger", "screen", "display", "camera", "sensor",
+            "mountain", "valley", "hill", "lake", "river", "stream", "waterfall", "island", "coast", "beach",
+            "sky", "cloud", "wind", "storm", "rainbow", "sun", "sunset", "sunrise", "star", "galaxy",
+            "city", "village", "town", "street", "road", "bridge", "station", "market", "mall", "shop",
+            "restaurant", "cafe", "cinema", "theater", "stadium", "arena", "office", "factory", "warehouse", "garage",
+            "avatar", "titanic", "rocky", "terminator", "gladiator", "inception", "frozen", "moana", "cars", "shrek",
+            "minions", "up", "cinderella", "aladdin", "mulan", "tarzan", "hercules", "nemo", "dory", "ratatouille"
+        ];
+        var hintlist = [
+            "pet", "royal", "fastfood", "fly", "trees", "travel", "simulation", "sit", "weird", "rice",
+            "work", "storm", "books", "bear", "read", "photo", "dry", "villain", "lunch", "storage",
+            "wood", "jump", "sweet", "screen", "space", "bread", "space", "glass", "horn", "dairy",
+            "sound", "dark", "learn", "banana", "sleep", "virtual", "sky", "crime", "orange", "video",
+            "water", "slow", "layers", "work", "hot", "care", "family", "sharp", "spiky", "luxury",
+            "time", "storm", "play", "small", "time", "call", "water", "run", "fruit", "light",
+            "cold", "insect", "dip", "screen", "color", "animals", "heroes", "carry", "buzz", "green",
+            "steps", "music", "shine", "dinosaur", "drink", "time", "wet", "big", "pasta", "screen",
+            "world", "stay", "hero", "write", "tail", "sweet", "type", "green", "trees", "cook",
+            "toys", "hands", "swim", "fried", "burn", "home", "strong", "burger", "fly", "rocks",
+            "write", "draw", "orange", "storm", "care", "hero", "yard", "pet", "mexican", "call",
+            "sand", "cute", "sweet", "sound", "plants", "fish", "dream", "reflect", "big", "spread",
+            "sound", "lava", "learn", "hop", "warm", "play", "fall", "space", "fruit", "stable",
+            "flow", "cold", "noodle", "light", "water", "history", "hero", "cut", "night", "sweet",
+            "power", "shake", "fun", "small", "wake", "voice", "coral", "fight", "fruit", "aim",
+
+            "sit", "safety", "eat", "eat", "eat", "drink", "drink", "cool", "heat", "light",
+            "work", "store", "store", "entry", "top", "ground", "up", "side", "open", "secure",
+            "tiny", "buzz", "wild", "stripe", "king", "wild", "sly", "forest", "ocean", "giant",
+            "arms", "shell", "claws", "sea", "smart", "ride", "farm", "wool", "horn", "mud",
+            "slice", "grain", "noodle", "breakfast", "meat", "green", "hot", "cold", "sweet", "smooth",
+            "yellow", "soft", "purple", "big", "small", "sour", "green", "tropical", "spiky", "hard",
+            "print", "scan", "network", "internet", "type", "rest", "storage", "program", "mobile", "web",
+            "cloud", "host", "signal", "wireless", "power", "charge", "view", "screen", "photo", "detect",
+            "high", "low", "small", "water", "flow", "stream", "fall", "land", "edge", "sand",
+            "above", "soft", "air", "storm", "color", "hot", "evening", "morning", "night", "space",
+            "busy", "small", "quiet", "path", "drive", "cross", "train", "buy", "shop", "store",
+            "food", "coffee", "movie", "stage", "sports", "events", "work", "build", "storage", "car",
+            "blue", "ship", "boxer", "robot", "arena", "dream", "snow", "ocean", "cars", "ogre",
+            "yellow", "float", "glass", "magic", "china", "jungle", "strong", "fish", "forget", "cook"
+        ];
         var hint
 
         function start() {
@@ -200,6 +268,7 @@
 
             document.getElementById("card").style.display = "block";
             document.getElementById("nextbutton").style.display = "block";
+            document.getElementById("startgame").style.display = "none";
             document.getElementById("0").style.display = "none";
             document.getElementById("1").style.display = "none";
             document.getElementById("2").style.display = "none";
@@ -209,6 +278,10 @@
             document.getElementById("play").style.display = "none";
             document.getElementById("checks").style.display = "none";
             document.getElementById("page1").style.display = "none";
+            document.getElementById("hintis").style.display = "none"
+            document.getElementById("roleis").style.display = "none"
+            document.getElementById("wordis").style.display = "none"
+            document.getElementById("person").style.color = "#FFF191"
             document.getElementById("players").style.padding = "0"
 
 
@@ -264,15 +337,39 @@
 
 
 
+
+
         function mouseDown() {
             document.getElementById("role").textContent = role
             document.getElementById("word").textContent = word
             document.getElementById("hint").textContent = hint
+            document.getElementById("roleis").style.display = "block"
+            if (role == "Innocent") {
+                document.getElementById("role").style.color = "#2BE7FF"
+                document.getElementById("word").style.color = "#B8FF78"
+                document.getElementById("wordis").style.display = "block"
+            }
+            else if (role == "Imposter") {
+                document.getElementById("role").style.color = "#B50000"
+                document.getElementById("hint").style.color = "#750000"
+                document.getElementById("hintis").style.display = "block"
+            }
+            else if (role == "Jester") {
+                document.getElementById("role").style.color = "Pink"
+                document.getElementById("word").style.color = "#B8FF78"
+                document.getElementById("wordis").style.display = "block"
+            }
         }
         function mouseUp() {
+            document.getElementById("hintis").style.display = "none"
+            document.getElementById("roleis").style.display = "none"
+            document.getElementById("wordis").style.display = "none"
             document.getElementById("role").textContent = "Role"
             document.getElementById("word").textContent = "Word"
             document.getElementById("hint").textContent = "Word"
+            document.getElementById("role").style.color = "White"
+            document.getElementById("word").style.color = "White"
+            document.getElementById("hint").style.color = "White"
         }
     </script>
 
