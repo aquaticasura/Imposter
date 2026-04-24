@@ -46,40 +46,43 @@
 
                 <div id="0">
                     <label class="form-label">Player 1</label>
-                    <input id="input0" class="form-control" >
+                    <input id="input0" class="form-control">
                 </div>
                 <div id="1">
                     <label class="form-label">Player 2</label>
-                    <input id="input1" class="form-control" >
+                    <input id="input1" class="form-control">
                 </div>
                 <div id="2">
                     <label class="form-label">Player 3</label>
-                    <input id="input2" class="form-control" >
+                    <input id="input2" class="form-control">
                 </div>
                 <div id="3">
                     <label class="form-label">Player 4</label>
-                    <input id="input3" class="form-control" >
+                    <input id="input3" class="form-control">
                 </div>
                 <div id="4">
                     <label class="form-label">Player 5</label>
-                    <input id="input4" class="form-control" >
+                    <input id="input4" class="form-control">
                 </div>
                 <div id="5">
                     <label class="form-label">Player 6</label>
-                    <input id="input5" class="form-control" >
+                    <input id="input5" class="form-control">
                 </div>
             </div>
-            <div class="mb-3 form-check" id="checks">
-                <label class="form-check-label" for="jester">Jester</label>
-                <input type="checkbox" on class="form-check-input-danger" id="jester">
-                <input id="jesterchance" type="number" min="0" max="100" value="15" style="width: 65px;"
-                    class="form-control" onformchange="handleCheck(this)">
-                
-                <br>
-                <label class="form-check-label" for="lover">Lover</label>
-                <input type="checkbox" on class="form-check-input-danger" id="lover">
-                <input id="loverchance" type="number" min="0" max="100" value="15" style="width: 65px;"
-                    class="form-control" onformchange="handleCheck(this)">
+            <div class="mb-3 form-check" id="checks" style="display: grid; place-items: center;">
+                <div>
+                    <label class="form-check-label" for="jester">Jester</label>
+                    <!--<input type="checkbox" on class="form-check-input-danger" id="jester">-->
+                    <input id="jesterchance" type="number" min="0" max="100" placeholder="0%" style="width: 100px;"
+                        class="form-control" onformchange="handleCheck(this)">
+                </div>
+
+                <div>
+                    <label class="form-check-label" for="lover">Lover</label>
+                    <!--<input type="checkbox" on class="form-check-input-danger" id="lover">-->
+                    <input id="loverchance" type="number" min="0" max="100" placeholder="0%" style="width: 100px;"
+                        class="form-control" onformchange="handleCheck(this)">
+                </div>
             </div>
             <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
                 style="margin-top: 20px; width:350px; background-color:#282828; color:white;">Start Game</p>
@@ -131,8 +134,6 @@
         document.getElementById("nextbutton").style.display = "none";
         document.getElementById("hint").style.display = "none";
         document.getElementById("startgame").style.display = "none";
-        document.getElementById("jesterchance").style.display = "none";
-        document.getElementById("loverchance").style.display = "none";
         document.getElementById("loverdiv").style.display = "none";
 
         var player0
@@ -273,49 +274,45 @@
             console.log(imposter)
 
 
-            if (jesterstate.checked) {
-                jesterrandom = Math.floor(Math.random() * 100);
-                jesterchance = document.getElementById("jesterchance").value
-                if (jesterrandom <= jesterchance) {
-                    console.log("jester enabled")
+            jesterrandom = Math.floor(Math.random() * 100);
+            jesterchance = document.getElementById("jesterchance").value
+            if (jesterrandom <= jesterchance) {
+                console.log("jester enabled")
+                jester = result[Math.floor(Math.random() * result.length)];
+
+                console.log("jester is:")
+                console.log(jester)
+                if (jester == imposter) {
                     jester = result[Math.floor(Math.random() * result.length)];
-
-                    console.log("jester is:")
-                    console.log(jester)
-                    if (jester == imposter) {
-                        jester = result[Math.floor(Math.random() * result.length)];
-                        console.log("rerolling jester")
-                    }
-                    else if (jester == lover) {
-                        jester = result[Math.floor(Math.random() * result.length)];
-                        console.log("rerolling jester")
-                    }
-
+                    console.log("rerolling jester")
                 }
+                else if (jester == lover) {
+                    jester = result[Math.floor(Math.random() * result.length)];
+                    console.log("rerolling jester")
+                }
+
             }
-            if (loverstate.checked) {
-                loverrandom = Math.floor(Math.random() * 100);
-                loverchance = document.getElementById("loverchance").value
-                if (loverrandom <= loverchance) {
-                    console.log("lover enabled")
-                    lover = result[Math.floor(Math.random() * result.length)];
-                    console.log("lover is:")
-                    console.log(lover)
+            loverrandom = Math.floor(Math.random() * 100);
+            loverchance = document.getElementById("loverchance").value
+            if (loverrandom <= loverchance) {
+                console.log("lover enabled")
+                lover = result[Math.floor(Math.random() * result.length)];
+                console.log("lover is:")
+                console.log(lover)
+                loverpartner = result[Math.floor(Math.random() * result.length)];
+                if (loverpartner == lover) {
                     loverpartner = result[Math.floor(Math.random() * result.length)];
-                    if (loverpartner == lover) {
-                        loverpartner = result[Math.floor(Math.random() * result.length)];
-                        console.log("rerolling lover partner");
-                    }
-                    if (lover == imposter) {
-                        jester = result[Math.floor(Math.random() * result.length)];
-                        console.log("rerolling lover")
-                    }
-                    else if (lover == jester) {
-                        lover = result[Math.floor(Math.random() * result.length)];
-                        console.log("rerolling lover")
-                    }
-
+                    console.log("rerolling lover partner");
                 }
+                if (lover == imposter) {
+                    jester = result[Math.floor(Math.random() * result.length)];
+                    console.log("rerolling lover")
+                }
+                else if (lover == jester) {
+                    lover = result[Math.floor(Math.random() * result.length)];
+                    console.log("rerolling lover")
+                }
+
             }
 
 
@@ -384,7 +381,7 @@
 
         }
 
-        const jestbox = document.getElementById('jester');
+        /*const jestbox = document.getElementById('jester');
 
         jestbox.addEventListener('change', (event) => {
             if (event.target.checked) {
@@ -402,7 +399,7 @@
             } else {
                 document.getElementById("loverchance").style.display = "none";
             }
-        });
+        });*/
 
 
 
