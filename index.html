@@ -11,22 +11,38 @@
 
 </head>
 
+<style>
+    .prevent-select {
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Standard syntax */
+    }
+</style>
 
 
-
-<body style="background: white">
+<body style="background: #121212; color:white;">
     <script src="js/bootstrap.js"></script>
 
     <div class="position-absolute top-50 start-50 translate-middle">
-        <div id="players">
+        <div id="players" style="padding:20px; border-radius: 25px; background-color:#181818;">
             <div id="page1">
-                <label type="number" max="6" min="0" class="form-label">How many players (Max 6)</label>
+                <label type="number" max="6" min="0" class="form-label" style="color:white;">How many players (Max
+                    6)</label>
                 <input type="number" class="form-control" id="playeramount">
-                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-primary btn-lg"
+                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-danger btn-lg"
                     style="margin-top: 20px; width:350px;">
                     Continue</p>
             </div>
-            <div id="holder" class="mb-3" style="width:250px; margin:50px">
+            <div id="holder" class="mb-3" style="width:250px; margin:50px;">
 
                 <div id="0">
                     <label class="form-label">Player 1</label>
@@ -55,26 +71,25 @@
             </div>
             <div class="mb-3 form-check" id="checks">
                 <label class="form-check-label" for="jester">Jester</label>
-                <input type="checkbox" class="form-check-input" id="jester">
+                <input type="checkbox" on class="form-check-input-danger" id="jester">
                 <input id="jesterchance" type="number" min="0" max="100" value="15" style="width: 65px;"
-                    class="form-control">
+                    class="form-control" onformchange="handleCheck(this)">
             </div>
-            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-primary btn-lg"
+            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-danger btn-lg"
                 style="margin-top: 20px; width:350px;">Start Game</p>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle"></div>
-        <div id="card" class="" style="width:auto;" onmousedown="mouseDown()" onmouseup="mouseUp()"
-            ontouchstart="mouseDown()" ontouchend="mouseUp()">
-            <div class="" style="">
-                <h1 id="person" class="card-title">Person</h1>
-                <h2 id="role" class="card-text">Role</h2>
-                <h2 id="word" class="card-text">Word</h2>
-                <h2 id="hint" class="card-text">Hint</h2>
-                <p id="demo"></p>
+        <div id="card" class="prevent-select" style="width:auto; margin:5px; padding: 50px; border-radius: 20px; background-color:#181818;"
+            onmousedown="mouseDown()" onmouseup="mouseUp()" ontouchstart="mouseDown()" ontouchend="mouseUp()">
+            <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
+                <h1 id="person" class="card-text">Person</h1>
+                <h1 id="role" class="card-text">Role</h2>
+                    <h1 id="word" class="card-text">Word</h2>
+                        <h1 id="hint" class="card-text">Hint</h2>
             </div>
         </div>
-        <p id="nextbutton" class="btn btn-primary" onclick="next()" style="">Next</p>
-        <div id="startgame" style="margin:300px; display: flex;">
+        <p id="nextbutton" class="btn btn-danger" onclick="next()" style="">Next</p>
+        <div id="startgame" style="padding: 50px; border-radius: 20px; background-color:#181818;">
             <h1 id="starter">Starter</h1>
             <h1 id="starttext">Start</h1>
         </div>
@@ -87,6 +102,7 @@
     <script>
 
         document.getElementById("card").style.display = "none";
+        document.getElementById("holder").style.display = "none";
         document.getElementById("0").style.display = "none";
         document.getElementById("1").style.display = "none";
         document.getElementById("2").style.display = "none";
@@ -98,6 +114,7 @@
         document.getElementById("nextbutton").style.display = "none";
         document.getElementById("hint").style.display = "none";
         document.getElementById("startgame").style.display = "none";
+        document.getElementById("jesterchance").style.display = "none";
 
         var player0
         var player1
@@ -126,6 +143,8 @@
         function start() {
             let i = 0;
             players = document.getElementById("playeramount").value;
+            document.getElementById("holder").style.display = "block";
+            document.getElementById("page1").style.display = "none";
             while (i < players) {
                 document.getElementById(i).style.display = "block";
                 document.getElementById("play").style.display = "block"
@@ -149,26 +168,28 @@
 
             jesterstate = document.getElementById("jester")
 
-            word = wordlist[Math.floor(Math.random() * result.length)];
+            word = wordlist[Math.floor(Math.random() * wordlist.length)];
             console.log(word)
 
             imposter = result[Math.floor(Math.random() * result.length)];
             console.log("imposter is:")
             console.log(imposter)
-
-            jesterrandom = Math.floor(Math.random() * 100);
-            jesterchance = document.getElementById("jesterchance").value
-            if (jesterrandom <= jesterchance) {
-                console.log("jester enabled")
-                jester = result[Math.floor(Math.random() * result.length)];
-                console.log("jester is:")
-                console.log(jester)
-                if (jester == imposter) {
+            if (jesterstate.checked) {
+                jesterrandom = Math.floor(Math.random() * 100);
+                jesterchance = document.getElementById("jesterchance").value
+                if (jesterrandom <= jesterchance) {
+                    console.log("jester enabled")
                     jester = result[Math.floor(Math.random() * result.length)];
-                    console.log("rerolling jester")
-                }
+                    console.log("jester is:")
+                    console.log(jester)
+                    if (jester == imposter) {
+                        jester = result[Math.floor(Math.random() * result.length)];
+                        console.log("rerolling jester")
+                    }
 
+                }
             }
+
 
             document.getElementById("card").style.display = "block";
             document.getElementById("nextbutton").style.display = "block";
@@ -181,7 +202,8 @@
             document.getElementById("play").style.display = "none";
             document.getElementById("checks").style.display = "none";
             document.getElementById("page1").style.display = "none";
-            
+            document.getElementById("players").style.padding = "0"
+
 
 
             x = -1;
@@ -217,12 +239,21 @@
             else {
                 document.getElementById("startgame").style.display = "block";
                 document.getElementById("nextbutton").style.display = "none";
+                document.getElementById("card").style.display = "none";
                 document.getElementById("starter").textContent = result[Math.floor(Math.random() * result.length)];
             }
 
         }
 
+        const checkbox = document.getElementById('jester');
 
+        checkbox.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                document.getElementById("jesterchance").style.display = "block";
+            } else {
+                document.getElementById("jesterchance").style.display = "none";
+            }
+        });
 
 
 
@@ -232,9 +263,9 @@
             document.getElementById("hint").textContent = "hint"
         }
         function mouseUp() {
-            document.getElementById("role").textContent = ""
-            document.getElementById("word").textContent = ""
-            document.getElementById("hint").textContent = ""
+            document.getElementById("role").textContent = "Role"
+            document.getElementById("word").textContent = "Word"
+            document.getElementById("hint").textContent = "Word"
         }
     </script>
 
