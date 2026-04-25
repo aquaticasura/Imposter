@@ -3,12 +3,12 @@
 Everybody gets a word but not the imposter, they will have to use their hint to try to figure it out.
 
 
-## ❗Disclaimer❗
+## Disclaimer
 
 This is ONLY designed and optimized for mobile devices.
 
 
-## ⭐ Roles 
+## Roles 
 
 - Innocent
 - Imposter
