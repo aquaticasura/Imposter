@@ -1,1 +1,15 @@
-An Imposter game with some interesting twists
+Imposter with roles.
+
+Roles:
+
+Innocent
+
+Imposter
+
+Detective
+
+Lover
+
+Prosecutor
+
+Jester
