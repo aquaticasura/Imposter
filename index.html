@@ -12,6 +12,15 @@
 </head>
 
 <style>
+    * {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .background {
+        background: #121212;
+        color: white;
+    }
+
     .prevent-select {
         -webkit-touch-callout: none;
         /* iOS Safari */
@@ -26,27 +35,75 @@
         user-select: none;
         /* Standard syntax */
     }
+
+    .votingbtn {
+        width: 270px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .roles {
+        width: 100px;
+        height: 35px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .button {
+        width: 315px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .button:hover {
+        background-color: #343434;
+    }
+
+    .smallbutton:hover {
+        background-color: #343434;
+    }
+
+    .smallbutton {
+        width: 250px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .frame {
+        padding: 30px;
+        border-radius: 25px;
+        background-color: #181818;
+    }
+
+    .txt {
+        text-align: center;
+    }
+
+    #vote {
+        margin-top: 10px;
+    }
 </style>
 
 
-<body style="background: #121212; color:white;">
+<body class="background">
     <script src="js/bootstrap.js"></script>
 
-    <p id="help" style="text-align: center; margin-top: 30px;">Hello</p>
+    <p id="help" class="txt" style=" margin-top: 30px;">Hello</p>
     <div class="position-absolute top-50 start-50 translate-middle">
-        <div id="players" style="padding:20px; border-radius: 25px; background-color:#181818;">
+        <div id="players" class="frame">
             <div id="startpage">
-                <p id="imposter" onmousedown="imposter()" ontouchstart="imposter()" class="btn btn-lg"
-                    style="margin-top: 10px; width:315px; background-color:#282828; color:white;">Imposter</p>
-                <p id="mafia" class="btn btn-lg"
-                    style="margin-top: 10px; width:315px; background-color:#282828; color:white;">Mafia</p>
+                <p id="imposter" onmousedown="impostershow()" ontouchstart="impostershow()" class="btn btn-lg button"
+                    style="margin-top: 10px;">Imposter</p>
+                <p id="mafia" class="btn btn-lg button">Mafia</p>
             </div>
             <div id="playerpage">
                 <label type="number" max="7" min="2" class="form-label" style="color:white;">How many players (Max
                     7)</label>
                 <input type="number" class="form-control" id="playeramount">
-                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg"
-                    style="margin-top: 20px; width:315px; background-color:#282828; color:white;">
+                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg button"
+                    style="margin-top: 20px;">
                     Continue</p>
             </div>
             <div id="holder" class="mb-3 mx-auto" style="width:250px;">
@@ -79,8 +136,8 @@
                     <label class="form-label">Player 7</label>
                     <input id="input6" class="form-control">
                 </div>
-                <p id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg"
-                    style="margin-top: 20px; width:250px; background-color:#282828; color:white;">
+                <p id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg smallbutton"
+                    style="margin-top: 20px;">
                     Roles</p>
             </div>
 
@@ -89,81 +146,77 @@
                     <div class="col">
                         <label class="form-check-label">Jester</label>
                         <input id="jesterchance" type="number" min="0" max="100" placeholder="0%"
-                            style="width: 100px; height:25px;" class="form-control" onformchange="handleCheck(this)">
+                            class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
                         <label class="form-check-label">Lover</label>
                         <input id="loverchance" type="number" min="0" max="100" placeholder="0%"
-                            style="width: 100px; height:25px;" class="form-control" onformchange="handleCheck(this)">
+                            class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
                         <label class="form-check-label">Detective</label>
                         <input id="detectivechance" type="number" min="0" max="100" placeholder="0%"
-                            style="width: 100px; height:25px;" class="form-control" onformchange="handleCheck(this)">
+                            class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
                         <label class="form-check-label">Prosecutor</label>
                         <input id="prosecutorchance" type="number" min="0" max="100" placeholder="0%"
-                            style="width: 100px; height:25px;" class="form-control" onformchange="handleCheck(this)">
+                            class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                 </div>
             </div>
-            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
-                style="margin-top: 20px; width:270px; margin:25px; background-color:#282828; color:white;">Start Game
+            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg button" style="margin-top: 20px;">
+                Start
             </p>
+            <p id="error" class="error txt">Error</p>
         </div>
 
         <div class="position-absolute top-50 start-50 translate-middle"></div>
-        <div id="card" class="prevent-select"
-            style="width:auto; margin:5px; padding: 50px; border-radius: 20px; background-color:#181818;"
-            onmousedown="mouseDown()" onmouseup="mouseUp()" ontouchstart="mouseDown()" ontouchend="mouseUp()">
+        <div id="card" class="prevent-select frame" onmousedown="mouseDown()" onmouseup="mouseUp()"
+            ontouchstart="mouseDown()" ontouchend="mouseUp()">
             <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
                 <h1 id="person" class="card-text">Person</h1>
                 <h4 id="roleis">Your Role is:</h4>
-                <h1 id="role" class="card-text">Role</h2>
-                    <div id="loverdiv" style="text-align: center;">
+                <h1 id="role" class="card-text">Hold to reveal</h2>
+                    <div id="loverdiv" class="txt">
                         <h4 id="lovertext">Your lover is:</h4>
                         <h1 id="loverpartner">Lover</h1>
                     </div>
-                    <div id="detectiveoverview" style="text-align: center;">
+                    <div id="detectiveoverview" class="txt">
                         <h4 id="demo1" class="card-text">Analysis:</h4>
                         <h5 id="detective1" class="">Jesters</h5>
                         <h5 id="detective2" class="">Prosecutors</h5>
                         <h5 id="detective3" class="">Lover</h5>
                     </div>
-                    <div id="prosecutordiv" style="text-align: center;">
+                    <div id="prosecutordiv" class="txt">
                         <h4 id="targetis" class="card-text">Your target is:</h4>
-                        <h5 id="target" class="">Target</h5>
+                        <h1 id="target" class="">Target</h1>
                     </div>
                     <h4 id="wordis">Your word is:</h4>
-                    <h1 id="word" class="card-text">Word</h1>
+                    <h1 id="word" class="card-text"></h1>
 
 
 
             </div>
         </div>
-        <p id="nextbutton" class="btn btn-lg"
-            style="margin-top: 25px; width:270px; background-color:#282828; color:white;" class="btn" onclick="next()">
-            Next</p>
-        <div id="startgame" style="padding: 20px; border-radius: 20px; background-color:#181818; text-align: center;">
+        <p id="nextbutton" class="btn btn-lg smallbutton" style="margin-top: 25px;" onclick="next()">Next</p>
+
+        <div id="startgame" class="frame txt">
             <h1 id="starter" style="color:#FFF191">Starter</h1>
             <h1 id="starttext">Starts</h1>
-            <p id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg"
-                style="margin-top: 20px; width:270px; background-color:#282828; color:white;">Vote</p>
-            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg"
-                style=" width:270px; background-color:#282828; color:white;">Play Again</p>
+            <p id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg smallbutton">Vote</p>
+            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton">Play Again</p>
         </div>
 
-        <div id="voting">
-            <h1 id="name" style="color:#FFF191">Name</h1>
-            <p id="20" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="21" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="22" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="23" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="24" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="25"class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="26" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
-            <p id="27" class="btn btn-lg" style="width:270px; background-color:#282828; color:white;">Person 1</p>
+        <div id="voting" class="frame">
+            <h1 id="name" class="txt" style="color:#FFF191;">Name</h1>
+            <p id="20" class="btn btn-lg smallbutton">Person 1</p>
+            <p id="21" class="btn btn-lg smallbutton">Person 2</p>
+            <p id="22" class="btn btn-lg smallbutton">Person 3</p>
+            <p id="23" class="btn btn-lg smallbutton">Person 4</p>
+            <p id="24" class="btn btn-lg smallbutton">Person 5</p>
+            <p id="25" class="btn btn-lg smallbutton">Person 6</p>
+            <p id="26" class="btn btn-lg smallbutton">Person 7</p>
         </div>
 
     </div>
@@ -175,6 +228,7 @@
         document.getElementById("playerpage").style.display = "none";
         document.getElementById("card").style.display = "none";
         document.getElementById("holder").style.display = "none";
+
         document.getElementById("0").style.display = "none";
         document.getElementById("1").style.display = "none";
         document.getElementById("2").style.display = "none";
@@ -182,6 +236,7 @@
         document.getElementById("4").style.display = "none";
         document.getElementById("5").style.display = "none";
         document.getElementById("6").style.display = "none";
+
         document.getElementById("20").style.display = "none";
         document.getElementById("21").style.display = "none";
         document.getElementById("22").style.display = "none";
@@ -189,6 +244,7 @@
         document.getElementById("24").style.display = "none";
         document.getElementById("25").style.display = "none";
         document.getElementById("26").style.display = "none";
+
         document.getElementById("help").style.display = "none";
         document.getElementById("play").style.display = "none";
         document.getElementById("checks").style.display = "none";
@@ -198,45 +254,46 @@
         document.getElementById("detectiveoverview").style.display = "none";
         document.getElementById("prosecutordiv").style.display = "none";
         document.getElementById("voting").style.display = "none";
+        document.getElementById("error").style.display = "none";
 
-        var player0
-        var player1
-        var player2
-        var player3
-        var player4
-        var player5
-        var players
-        var playerlist
-        var result
-        var rolelist
+        let player0
+        let player1
+        let player2
+        let player3
+        let player4
+        let player5
+        let players
+        let playerlist
+        let result
+        let rolelist
 
-        var imposter
+        let imposter
 
-        var loverrandom
-        var loverpartner
-        var loverchance
-        var lover
-
-
-        var detectiverandom
-        var detectivechance
-        var detective
+        let loverrandom
+        let loverpartner
+        let loverchance
+        let lover
 
 
-        var jesterrandom
-        var jesterchance
-        var jester
+        let detectiverandom
+        let detectivechance
+        let detective
 
-        var prosecutorrandom
-        var prosecutorchance
-        var prosecutor
-        var target
-        var targetlist;
 
-        var role
-        var x
-        var hint
-        var wordlist = [
+        let jesterrandom
+        let jesterchance
+        let jester
+
+        let prosecutorrandom
+        let prosecutorchance
+        let prosecutor
+        let target
+        let targetlist;
+
+        let role
+        let x  //letiable used for roles in the arrays
+        let hint
+        let wordlist = [
             "book", "chair", "knife", "window", "bed", "clock", "backpack", "pencil", "helmet", "fork",
             "spoon", "plate", "lamp", "desk", "key", "lock", "door", "mirror", "sofa", "blanket",
             "dog", "cat", "bird", "turtle", "fish", "lizard", "frog", "elephant", "monkey", "mouse",
@@ -314,7 +371,7 @@
             "treasure", "artifact", "relic", "amulet", "scroll", "mapquest", "odyssey", "voyage", "expedition", "adventure",
             "battle", "duel", "quest", "mission", "escape", "survival", "strategy", "tactics", "victory", "defeat"
         ];
-        var hintlist = [
+        let hintlist = [
             "read", "sit", "cut", "glass", "sleep", "time", "carry", "write", "safety", "eat",
             "eat", "eat", "light", "work", "open", "secure", "entry", "reflect", "sit", "warm",
             "pet", "pet", "fly", "slow", "water", "reptile", "jump", "big", "banana", "small",
@@ -392,6 +449,7 @@
             "gold", "old", "old", "power", "paper", "journey", "epic", "sea", "travel", "explore",
             "fight", "duel", "goal", "task", "run", "alive", "plan", "plan", "win", "lose"];
 
+        let voteoffset
 
         function start() {
             let i = 0;
@@ -399,13 +457,15 @@
             if (players <= 0) {
                 players = 2;
             }
+            else if (players > 7) {
+                players = 7;
+            }
             document.getElementById("holder").style.display = "block";
             document.getElementById("playerpage").style.display = "none";
             while (i < players) {
                 document.getElementById(i).style.display = "block";
                 document.getElementById("play").style.display = "block"
                 i++;
-                console.log("+1")
             }
         }
 
@@ -421,97 +481,105 @@
 
             playerlist = [player0, player1, player2, player3, player4, player5, player6];
             result = playerlist.filter(word => word.trim().length > 0);
-            rolelist = result
-
-            var y;
-            y = [Math.floor(Math.random() * wordlist.length)];
-            word = wordlist[y]
-            hint = hintlist[y]
-            console.log(word)
-
-            imposter = rolelist[Math.floor(Math.random() * rolelist.length)];
-            rolelist = rolelist.filter(item => item !== imposter)
-            //remove the role from the list
-
-            //jester
-            jesterrandom = Math.floor(Math.random() * 100);
-            jesterchance = document.getElementById("jesterchance").value
-            if (jesterrandom <= jesterchance) {
-
-                //randomize the lover role based on the filtered playerlist
-                jester = rolelist[Math.floor(Math.random() * rolelist.length)];
-                //remove the role from the list
-                rolelist = rolelist = rolelist.filter(item => item !== jester)
+            if (result.length < 1) {
+                start()
+                document.getElementById("error").style.display = "block";
+                document.getElementById("error").textContent = "Error: all names not filled";
             }
+            else {
+                document.getElementById("error").style.display = "none";
+                rolelist = result
 
-            //lover
-            loverrandom = Math.floor(Math.random() * 100);
-            loverchance = document.getElementById("loverchance").value
-            if (loverrandom <= loverchance) {
+                let y;
+                y = [Math.floor(Math.random() * wordlist.length)];
+                word = wordlist[y]
+                hint = hintlist[y]
+                console.log(word)
 
-                //randomize the lover role based on the filtered playerlist
-                lover = rolelist[Math.floor(Math.random() * rolelist.length)];
+                imposter = rolelist[Math.floor(Math.random() * rolelist.length)];
+                rolelist = rolelist.filter(item => item !== imposter)
                 //remove the role from the list
-                rolelist = rolelist = rolelist.filter(item => item !== lover)
 
-                loverlist = result.filter(item => item !== lover)
-                loverpartner = loverlist[Math.floor(Math.random() * loverlist.length)];
+                //jester
+                jesterrandom = Math.floor(Math.random() * 100);
+                jesterchance = document.getElementById("jesterchance").value
+                if (jesterrandom <= jesterchance) {
 
+                    //randomize the lover role based on the filtered playerlist
+                    jester = rolelist[Math.floor(Math.random() * rolelist.length)];
+                    //remove the role from the list
+                    rolelist = rolelist = rolelist.filter(item => item !== jester)
+                }
+
+                //lover
+                loverrandom = Math.floor(Math.random() * 100);
+                loverchance = document.getElementById("loverchance").value
+                if (loverrandom <= loverchance) {
+
+                    //randomize the lover role based on the filtered playerlist
+                    lover = rolelist[Math.floor(Math.random() * rolelist.length)];
+                    //remove the role from the list
+                    rolelist = rolelist = rolelist.filter(item => item !== lover)
+
+                    loverlist = result.filter(item => item !== lover)
+                    loverpartner = loverlist[Math.floor(Math.random() * loverlist.length)];
+
+                }
+
+                //detective
+                detectiverandom = Math.floor(Math.random() * 100);
+                detectivechance = document.getElementById("detectivechance").value
+                if (detectiverandom <= detectivechance) {
+
+                    //randomize the lover role based on the filtered playerlist
+                    detective = rolelist[Math.floor(Math.random() * rolelist.length)];
+                    //remove the role from the list
+                    rolelist = rolelist.filter(item => item !== detective)
+
+                }
+
+                //prosecutor
+                prosecutorrandom = Math.floor(Math.random() * 100);
+                prosecutorchance = document.getElementById("prosecutorchance").value
+                if (prosecutorrandom <= prosecutorchance) {
+
+                    //randomize the role based on the filtered playerlist
+                    prosecutor = rolelist[Math.floor(Math.random() * rolelist.length)];
+                    //remove the role from the list
+                    rolelist = rolelist.filter(item => item !== prosecutor)
+
+                    targetlist = result.filter(item => item !== prosecutor)
+                    target = targetlist[Math.floor(Math.random() * targetlist.length)];
+
+                }
+
+
+                document.getElementById("card").style.display = "block";
+                document.getElementById("nextbutton").style.display = "block";
+                document.getElementById("startgame").style.display = "none";
+                document.getElementById("rolelist").style.display = "none";
+                document.getElementById("0").style.display = "none";
+                document.getElementById("1").style.display = "none";
+                document.getElementById("2").style.display = "none";
+                document.getElementById("3").style.display = "none";
+                document.getElementById("4").style.display = "none";
+                document.getElementById("5").style.display = "none";
+                document.getElementById("6").style.display = "none";
+                document.getElementById("play").style.display = "none";
+                document.getElementById("checks").style.display = "none";
+                document.getElementById("playerpage").style.display = "none";
+                document.getElementById("roleis").style.display = "none"
+                document.getElementById("wordis").style.display = "none"
+                document.getElementById("person").style.color = "#FFF191"
+                document.getElementById("players").style.padding = "0"
+
+                x = -1;
+                next()
             }
-
-            //detective
-            detectiverandom = Math.floor(Math.random() * 100);
-            detectivechance = document.getElementById("detectivechance").value
-            if (detectiverandom <= detectivechance) {
-
-                //randomize the lover role based on the filtered playerlist
-                detective = rolelist[Math.floor(Math.random() * rolelist.length)];
-                //remove the role from the list
-                rolelist = rolelist.filter(item => item !== detective)
-
-            }
-
-            //prosecutor
-            prosecutorrandom = Math.floor(Math.random() * 100);
-            prosecutorchance = document.getElementById("prosecutorchance").value
-            if (prosecutorrandom <= prosecutorchance) {
-
-                //randomize the role based on the filtered playerlist
-                prosecutor = rolelist[Math.floor(Math.random() * rolelist.length)];
-                //remove the role from the list
-                rolelist = rolelist.filter(item => item !== prosecutor)
-
-                targetlist = result.filter(item => item !== prosecutor)
-                target = targetlist[Math.floor(Math.random() * targetlist.length)];
-
-            }
-
-
-            document.getElementById("card").style.display = "block";
-            document.getElementById("nextbutton").style.display = "block";
-            document.getElementById("startgame").style.display = "none";
-            document.getElementById("rolelist").style.display = "none";
-            document.getElementById("0").style.display = "none";
-            document.getElementById("1").style.display = "none";
-            document.getElementById("2").style.display = "none";
-            document.getElementById("3").style.display = "none";
-            document.getElementById("4").style.display = "none";
-            document.getElementById("5").style.display = "none";
-            document.getElementById("6").style.display = "none";
-            document.getElementById("play").style.display = "none";
-            document.getElementById("checks").style.display = "none";
-            document.getElementById("playerpage").style.display = "none";
-            document.getElementById("roleis").style.display = "none"
-            document.getElementById("wordis").style.display = "none"
-            document.getElementById("person").style.color = "#FFF191"
-            document.getElementById("players").style.padding = "0"
-
-            x = -1;
-            next()
         }
 
         function checks() {
-            var element = document.getElementById("checks")
+            let element = document.getElementById("checks")
             if (element.style.display == "none") {
                 element.style.display = "block";
             } else {
@@ -568,19 +636,22 @@
 
 
         function vote() {
-            let i = 20;
-            let y = 0
-            players = document.getElementById("playeramount").value;
-            while (i - 20 < players) {
-                document.getElementById(i).style.display = "block";
-                i++;
-            }
+            let i = 0;
+            let f = 19;
+            players = document.getElementById("playeramount").value - voteoffset;
             document.getElementById("startgame").style.display = "none"
             document.getElementById("voting").style.display = "block";
-            document.getElementById("name").textContent = result[y]
+            document.getElementById("name").textContent = result[i]
+            while (i != players) {
+                i++;
+                f++;
+                document.getElementById(f).style.display = "block"
+                document.getElementById(f).textContent = result[i]
+            }
+
         }
 
-        function imposter() {
+        function impostershow() {
             document.getElementById("startpage").style.display = "none"
             document.getElementById("playerpage").style.display = "block"
         }
@@ -664,8 +735,8 @@
             document.getElementById("wordis").style.display = "none"
             document.getElementById("loverdiv").style.display = "none";
             document.getElementById("detectiveoverview").style.display = "none";
-            document.getElementById("role").textContent = "Role"
-            document.getElementById("word").textContent = "Word"
+            document.getElementById("role").textContent = "Hold to reveal"
+            document.getElementById("word").textContent = ""
             document.getElementById("wordis").textContent = "Your word is:"
             document.getElementById("role").style.color = "White"
             document.getElementById("word").style.color = "White"
