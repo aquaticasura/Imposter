@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
     <title>Imposter</title>
 
@@ -88,6 +91,7 @@
 
 
 <body class="background">
+
     <script src="js/bootstrap.js"></script>
 
     <p id="help" class="txt" style=" margin-top: 30px;">Hello</p>
@@ -209,14 +213,16 @@
         </div>
 
         <div id="voting" class="frame">
+
             <h1 id="name" class="txt" style="color:#FFF191;">Name</h1>
-            <p id="20" class="btn btn-lg smallbutton">Person 1</p>
-            <p id="21" class="btn btn-lg smallbutton">Person 2</p>
-            <p id="22" class="btn btn-lg smallbutton">Person 3</p>
-            <p id="23" class="btn btn-lg smallbutton">Person 4</p>
-            <p id="24" class="btn btn-lg smallbutton">Person 5</p>
-            <p id="25" class="btn btn-lg smallbutton">Person 6</p>
-            <p id="26" class="btn btn-lg smallbutton">Person 7</p>
+
+            <p id="20" class="btn btn-lg smallbutton" onclick="votebutton(1)">Person 1</p>
+            <p id="21" class="btn btn-lg smallbutton" onclick="votebutton(2)">Person 2</p>
+            <p id="22" class="btn btn-lg smallbutton" onclick="votebutton(3)">Person 3</p>
+            <p id="23" class="btn btn-lg smallbutton" onclick="votebutton(4)">Person 4</p>
+            <p id="24" class="btn btn-lg smallbutton" onclick="votebutton(5)">Person 5</p>
+            <p id="25" class="btn btn-lg smallbutton" onclick="votebutton(6)">Person 6</p>
+            <p id="26" class="btn btn-lg smallbutton" onclick="votebutton(7)">Person 7</p>
         </div>
 
     </div>
@@ -225,6 +231,7 @@
 
 
     <script>
+
         document.getElementById("playerpage").style.display = "none";
         document.getElementById("card").style.display = "none";
         document.getElementById("holder").style.display = "none";
@@ -273,7 +280,6 @@
         let loverpartner
         let loverchance
         let lover
-
 
         let detectiverandom
         let detectivechance
@@ -449,7 +455,7 @@
             "gold", "old", "old", "power", "paper", "journey", "epic", "sea", "travel", "explore",
             "fight", "duel", "goal", "task", "run", "alive", "plan", "plan", "win", "lose"];
 
-        let voteoffset
+        let voter = 1
 
         function start() {
             let i = 0;
@@ -637,18 +643,56 @@
 
         function vote() {
             let i = 0;
-            let f = 19;
-            players = document.getElementById("playeramount").value - voteoffset;
+            let f = 20;
+            players = document.getElementById("playeramount").value;
             document.getElementById("startgame").style.display = "none"
             document.getElementById("voting").style.display = "block";
             document.getElementById("name").textContent = result[i]
             while (i != players) {
-                i++;
-                f++;
                 document.getElementById(f).style.display = "block"
                 document.getElementById(f).textContent = result[i]
+                i++;
+                f++;
             }
 
+
+        }
+
+        function votebutton(voted) {
+            if (voted == 1) {
+                votefunc()
+            }
+            else if (voted == 2) {
+                votefunc()
+            }
+            else if (voted == 3) {
+                votefunc()
+            }
+            else if (voted == 4) {
+                votefunc()
+            }
+            else if (voted == 5) {
+                votefunc()
+            }
+            else if (voted == 6) {
+                votefunc()
+            }
+            else if (voted == 7) {
+                votefunc()
+            }
+        }
+
+        function votefunc() {
+            if (voter < result.length) {
+                console.log("voted")
+                console.log(voter)
+                console.log(result.length)
+                document.getElementById("name").textContent = result[voter]
+                voter++
+            }
+            else {
+                console.log("finished")
+            }
         }
 
         function impostershow() {
