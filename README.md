@@ -2,10 +2,7 @@
 
 Everybody gets a word but not the imposter, they will have to use their hint to try to figure it out.
 
-
-## Disclaimer
-
-This is ONLY designed and optimized for mobile devices.
+>This is ONLY designed and optimized for mobile devices.
 
 
 ## Roles 
