@@ -79,6 +79,12 @@
         color: white;
     }
 
+    .smallxbutton {
+        width: 250px;
+        background-color: #282828;
+        color: white;
+    }
+
     .frame {
         padding: 30px;
         border-radius: 25px;
@@ -220,29 +226,30 @@
         <div id="voting" class="frame">
             <h1 class="txt">Voting:</h1>
             <h1 id="name" class="txt" style="color:#FFF191;">Name</h1>
-            <h4 id="20" class="btn btn-lg smallbutton" onclick="votebutton(result[0])">Person 1</h4>
-            <h4 id="21" class="btn btn-lg smallbutton" onclick="votebutton(result[1])">Person 2</h4>
-            <h4 id="22" class="btn btn-lg smallbutton" onclick="votebutton(result[2])">Person 3</h4>
-            <h4 id="23" class="btn btn-lg smallbutton" onclick="votebutton(result[3])">Person 4</h4>
-            <h4 id="24" class="btn btn-lg smallbutton" onclick="votebutton(result[4])">Person 5</h4>
-            <h4 id="25" class="btn btn-lg smallbutton" onclick="votebutton(result[5])">Person 6</h4>
-            <h4 id="26" class="btn btn-lg smallbutton" onclick="votebutton(result[6])">Person 7</h4>
+            <h4 id="20" class="btn btn-lg smallxbutton" onclick="votebutton(result[0])">Person 1</h4>
+            <h4 id="21" class="btn btn-lg smallxbutton" onclick="votebutton(result[1])">Person 2</h4>
+            <h4 id="22" class="btn btn-lg smallxbutton" onclick="votebutton(result[2])">Person 3</h4>
+            <h4 id="23" class="btn btn-lg smallxbutton" onclick="votebutton(result[3])">Person 4</h4>
+            <h4 id="24" class="btn btn-lg smallxbutton" onclick="votebutton(result[4])">Person 5</h4>
+            <h4 id="25" class="btn btn-lg smallxbutton" onclick="votebutton(result[5])">Person 6</h4>
+            <h4 id="26" class="btn btn-lg smallxbutton" onclick="votebutton(result[6])">Person 7</h4>
         </div>
 
         <div id="reveal" class="frame">
-            <h1 id="votedout" class="txt" style="color:#FFF191; font-size:larger;">Name</h1>
+            <h1 id="votedout" class="txt" style="color:#ffffff; font-size:larger;">Name</h1>
             <h4 id="revealbtn" class="btn btn-lg smallbutton margtop" onclick="reveal()">Reveal</h4>
         </div>
 
         <div id="results" class="frame">
-            <h1 id="result0" class="txt" style="color:#B50000; font-size:larger;">Imposter</h1>
-            <h1 id="result1" class="txt" style="color:#006DFF; font-size:large;">Detective</h1>
-            <h1 id="result2" class="txt" style="color:#FFEA00; font-size:large;">Prosecutor</h1>
-            <h1 id="result3" class="txt" style="color:pink; font-size:large;">Jester</h1>
-            <h1 id="result4" class="txt" style="color:#FF29AB; font-size:large;">Lover</h1>
-            <h1 id="result5" class="txt" style="color:#FFF191; font-size:large;">Name</h1>
-            <h1 id="result6" class="txt" style="color:#FFF191; font-size:large;">Name</h1>
-            <h4 id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton margtop">Play Again</h4>
+            <h1 id="result0" class="txt" style="color:#B50000; font-size:x-large;">Imposter</h1>
+            <h1 id="result1" class="txt" style="color:#006DFF; font-size:x-large;">Detective</h1>
+            <h1 id="result2" class="txt" style="color:#FFEA00; font-size:x-large;">Prosecutor</h1>
+            <h1 id="result3" class="txt" style="color:pink; font-size:x-large;">Jester</h1>
+            <h1 id="result4" class="txt" style="color:#FF29AB; font-size:x-large;">Lover</h1>
+            <h1 id="result5" class="txt" style="color:#FFF191; font-size:x-large;">Name</h1>
+            <h1 id="result6" class="txt" style="color:#FFF191; font-size:x-large;">Name</h1>
+            <h4 id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton margtop">Play
+                Again</h4>
         </div>
 
 
@@ -756,8 +763,11 @@
                 else if (frequentvote.length == 2) {
                     document.getElementById("votedout").textContent = 'Tie between ' + frequentvote[0] + ' and ' + frequentvote[1];
                 }
-                else {
+                else if (frequentvote.length == 3){
                     document.getElementById("votedout").textContent = 'Tie between ' + frequentvote[0] + ', ' + frequentvote[1] + ' and ' + frequentvote[2];
+                }
+                else {
+                    document.getElementById("votedout").textContent = 'Tie between ' + frequentvote[0] + ', ' + frequentvote[1] + ', ' + frequentvote[2] + ' and ' + frequentvote[3];
                 }
             }
         }
