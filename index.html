@@ -455,7 +455,9 @@
             "gold", "old", "old", "power", "paper", "journey", "epic", "sea", "travel", "explore",
             "fight", "duel", "goal", "task", "run", "alive", "plan", "plan", "win", "lose"];
 
+        let votes = []
         let voter = 1
+        let frequentvote
 
         function start() {
             let i = 0;
@@ -659,39 +661,55 @@
         }
 
         function votebutton(voted) {
-            if (voted == 1) {
-                votefunc()
-            }
-            else if (voted == 2) {
-                votefunc()
-            }
-            else if (voted == 3) {
-                votefunc()
-            }
-            else if (voted == 4) {
-                votefunc()
-            }
-            else if (voted == 5) {
-                votefunc()
-            }
-            else if (voted == 6) {
-                votefunc()
-            }
-            else if (voted == 7) {
-                votefunc()
-            }
+            votes.push(voted)
+            votefunc()
         }
+
+        function findMostFrequent(words) {
+            if (words.length === 0) return [];
+
+            const counts = {};
+            let maxFreq = 0;
+            let freqresult = [];
+
+            for (const word of words) {
+                counts[word] = (counts[word] || 0) + 1;
+
+   
+                if (counts[word] > maxFreq) {
+                    maxFreq = counts[word];
+                }
+            }
+
+
+            for (const word in counts) {
+                if (counts[word] === maxFreq) {
+                    freqresult.push(word);
+                }
+            }
+            console.log(freqresult)
+            return freqresult;
+        }
+
+
 
         function votefunc() {
             if (voter < result.length) {
-                console.log("voted")
-                console.log(voter)
-                console.log(result.length)
                 document.getElementById("name").textContent = result[voter]
                 voter++
+
             }
             else {
                 console.log("finished")
+                document.getElementById("voting").style.display = "none";
+                frequentvote = findMostFrequent(votes);
+                if (frequentvote.length <= 1) {
+                    console.log(frequentvote.length)
+                    console.log(frequentvote + ' has been voted out')
+                }
+                else {
+                    console.log("tie")
+                }
             }
         }
 
