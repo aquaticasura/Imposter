@@ -7,18 +7,13 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+
 
     <title>Imposter</title>
 
 </head>
 
 <style>
-    * {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
     .background {
         background: #121212;
         color: white;
@@ -37,6 +32,10 @@
         /* Internet Explorer/Edge */
         user-select: none;
         /* Standard syntax */
+    }
+
+    .margtop {
+        margin-top: 10px;
     }
 
     .votingbtn {
@@ -61,11 +60,17 @@
     }
 
     .button:hover {
-        background-color: #343434;
+        background-color: #2e2e2e;
     }
 
     .smallbutton:hover {
         background-color: #343434;
+    }
+
+    .mediumbutton {
+        width: 280px;
+        background-color: #282828;
+        color: white;
     }
 
     .smallbutton {
@@ -98,80 +103,81 @@
     <div class="position-absolute top-50 start-50 translate-middle">
         <div id="players" class="frame">
             <div id="startpage">
-                <p id="imposter" onmousedown="impostershow()" ontouchstart="impostershow()" class="btn btn-lg button"
-                    style="margin-top: 10px;">Imposter</p>
-                <p id="mafia" class="btn btn-lg button">Mafia</p>
+                <h4 id="imposter" onmousedown="impostershow()" ontouchstart="impostershow()" class="btn btn-lg button"
+                    style="margin-top: 10px;">Imposter</h4>
+                <h4 id="mafia" class="btn btn-lg button">Mafia</h4>
             </div>
             <div id="playerpage">
-                <label type="number" max="7" min="2" class="form-label" style="color:white;">How many players (Max
-                    7)</label>
+                <h6 type="number" max="7" min="2" class="form-label" style="color:white;">How many players (Max
+                    7)</h6>
                 <input type="number" class="form-control" id="playeramount">
-                <p id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg button"
+                <h4 id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg button"
                     style="margin-top: 20px;">
-                    Continue</p>
+                    Continue</h4>
             </div>
             <div id="holder" class="mb-3 mx-auto" style="width:250px;">
 
                 <div id="0">
-                    <label class="form-label">Player 1</label>
+                    <h6 class="form-label margtop">Player 1</h6>
                     <input id="input0" class="form-control">
                 </div>
                 <div id="1">
-                    <label class="form-label">Player 2</label>
+                    <h6 class="form-label margtop">Player 2</h6>
                     <input id="input1" class="form-control">
                 </div>
                 <div id="2">
-                    <label class="form-label">Player 3</label>
+                    <h6 class="form-label margtop">Player 3</h6>
                     <input id="input2" class="form-control">
                 </div>
                 <div id="3">
-                    <label class="form-label">Player 4</label>
+                    <h6 class="form-label margtop">Player 4</h6>
                     <input id="input3" class="form-control">
                 </div>
                 <div id="4">
-                    <label class="form-label">Player 5</label>
+                    <h6 class="form-label margtop">Player 5</h6>
                     <input id="input4" class="form-control">
                 </div>
                 <div id="5">
-                    <label class="form-label">Player 6</label>
+                    <h6 class="form-label margtop">Player 6</h6>
                     <input id="input5" class="form-control">
                 </div>
                 <div id="6">
-                    <label class="form-label">Player 7</label>
-                    <input id="input6" class="form-control">
+                    <h6 class="form-label margtop">Player 7</h5>
+                        <input id="input6" class="form-control">
                 </div>
-                <p id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg smallbutton"
-                    style="margin-top: 20px;">
-                    Roles</p>
+                <h4 id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg smallbutton"
+                    style="margin-top: 25px;">
+                    Roles</h4>
             </div>
 
-            <div class="container m-4 " id="checks">
+            <div class="container" id="checks">
                 <div class="row row-cols-2">
                     <div class="col">
-                        <label class="form-check-label">Jester</label>
+                        <h6 class="form-check-label">Jester</h6>
                         <input id="jesterchance" type="number" min="0" max="100" placeholder="0%"
                             class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
-                        <label class="form-check-label">Lover</label>
+                        <h6 class="form-check-label">Lover</h6>
                         <input id="loverchance" type="number" min="0" max="100" placeholder="0%"
                             class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
-                        <label class="form-check-label">Detective</label>
+                        <h6 class="form-check-label margtop">Detective</h6>
                         <input id="detectivechance" type="number" min="0" max="100" placeholder="0%"
                             class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                     <div class="col">
-                        <label class="form-check-label">Prosecutor</label>
+                        <h6 class="form-check-label margtop">Prosecutor</h6>
                         <input id="prosecutorchance" type="number" min="0" max="100" placeholder="0%"
                             class="form-control roles" onformchange="handleCheck(this)">
                     </div>
                 </div>
             </div>
-            <p id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg button" style="margin-top: 20px;">
+            <h4 id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton"
+                style="margin-top: 15px;">
                 Start
-            </p>
+            </h4>
             <p id="error" class="error txt">Error</p>
         </div>
 
@@ -203,27 +209,42 @@
 
             </div>
         </div>
-        <p id="nextbutton" class="btn btn-lg smallbutton" style="margin-top: 25px;" onclick="next()">Next</p>
+        <h4 id="nextbutton" class=" btn btn-lg smallbutton" style="margin-top: 25px;" onclick="next()">Next</h4>
 
         <div id="startgame" class="frame txt">
             <h1 id="starter" style="color:#FFF191">Starter</h1>
             <h1 id="starttext">Starts</h1>
-            <p id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg smallbutton">Vote</p>
-            <p id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton">Play Again</p>
+            <h4 id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg smallbutton">Vote</h4>
         </div>
 
         <div id="voting" class="frame">
-
+            <h1 class="txt">Voting:</h1>
             <h1 id="name" class="txt" style="color:#FFF191;">Name</h1>
-
-            <p id="20" class="btn btn-lg smallbutton" onclick="votebutton(1)">Person 1</p>
-            <p id="21" class="btn btn-lg smallbutton" onclick="votebutton(2)">Person 2</p>
-            <p id="22" class="btn btn-lg smallbutton" onclick="votebutton(3)">Person 3</p>
-            <p id="23" class="btn btn-lg smallbutton" onclick="votebutton(4)">Person 4</p>
-            <p id="24" class="btn btn-lg smallbutton" onclick="votebutton(5)">Person 5</p>
-            <p id="25" class="btn btn-lg smallbutton" onclick="votebutton(6)">Person 6</p>
-            <p id="26" class="btn btn-lg smallbutton" onclick="votebutton(7)">Person 7</p>
+            <h4 id="20" class="btn btn-lg smallbutton" onclick="votebutton(result[0])">Person 1</h4>
+            <h4 id="21" class="btn btn-lg smallbutton" onclick="votebutton(result[1])">Person 2</h4>
+            <h4 id="22" class="btn btn-lg smallbutton" onclick="votebutton(result[2])">Person 3</h4>
+            <h4 id="23" class="btn btn-lg smallbutton" onclick="votebutton(result[3])">Person 4</h4>
+            <h4 id="24" class="btn btn-lg smallbutton" onclick="votebutton(result[4])">Person 5</h4>
+            <h4 id="25" class="btn btn-lg smallbutton" onclick="votebutton(result[5])">Person 6</h4>
+            <h4 id="26" class="btn btn-lg smallbutton" onclick="votebutton(result[6])">Person 7</h4>
         </div>
+
+        <div id="reveal" class="frame">
+            <h1 id="votedout" class="txt" style="color:#FFF191; font-size:larger;">Name</h1>
+            <h4 id="revealbtn" class="btn btn-lg smallbutton margtop" onclick="reveal()">Reveal</h4>
+        </div>
+
+        <div id="results" class="frame">
+            <h1 id="result0" class="txt" style="color:#B50000; font-size:larger;">Imposter</h1>
+            <h1 id="result1" class="txt" style="color:#006DFF; font-size:large;">Detective</h1>
+            <h1 id="result2" class="txt" style="color:#FFEA00; font-size:large;">Prosecutor</h1>
+            <h1 id="result3" class="txt" style="color:pink; font-size:large;">Jester</h1>
+            <h1 id="result4" class="txt" style="color:#FF29AB; font-size:large;">Lover</h1>
+            <h1 id="result5" class="txt" style="color:#FFF191; font-size:large;">Name</h1>
+            <h1 id="result6" class="txt" style="color:#FFF191; font-size:large;">Name</h1>
+            <h4 id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton margtop">Play Again</h4>
+        </div>
+
 
     </div>
 
@@ -244,6 +265,14 @@
         document.getElementById("5").style.display = "none";
         document.getElementById("6").style.display = "none";
 
+        document.getElementById("result0").style.display = "none";
+        document.getElementById("result1").style.display = "none";
+        document.getElementById("result2").style.display = "none";
+        document.getElementById("result3").style.display = "none";
+        document.getElementById("result4").style.display = "none";
+        document.getElementById("result5").style.display = "none";
+        document.getElementById("result6").style.display = "none";
+
         document.getElementById("20").style.display = "none";
         document.getElementById("21").style.display = "none";
         document.getElementById("22").style.display = "none";
@@ -262,6 +291,8 @@
         document.getElementById("prosecutordiv").style.display = "none";
         document.getElementById("voting").style.display = "none";
         document.getElementById("error").style.display = "none";
+        document.getElementById("reveal").style.display = "none";
+        document.getElementById("results").style.display = "none";
 
         let player0
         let player1
@@ -280,19 +311,23 @@
         let loverpartner
         let loverchance
         let lover
+        let loverstate
 
         let detectiverandom
         let detectivechance
         let detective
+        let detectivestate
 
 
         let jesterrandom
         let jesterchance
+        let jesterstate
         let jester
 
         let prosecutorrandom
         let prosecutorchance
         let prosecutor
+        let prosecutorstate
         let target
         let targetlist;
 
@@ -479,6 +514,9 @@
 
 
         function play() {
+            frequentvote = []
+            votes = []
+            voter = 1
             player0 = document.getElementById("input0").value;
             player1 = document.getElementById("input1").value;
             player2 = document.getElementById("input2").value;
@@ -517,6 +555,7 @@
                     jester = rolelist[Math.floor(Math.random() * rolelist.length)];
                     //remove the role from the list
                     rolelist = rolelist = rolelist.filter(item => item !== jester)
+                    jesterstate = true;
                 }
 
                 //lover
@@ -531,6 +570,7 @@
 
                     loverlist = result.filter(item => item !== lover)
                     loverpartner = loverlist[Math.floor(Math.random() * loverlist.length)];
+                    loverstate = true;
 
                 }
 
@@ -543,6 +583,7 @@
                     detective = rolelist[Math.floor(Math.random() * rolelist.length)];
                     //remove the role from the list
                     rolelist = rolelist.filter(item => item !== detective)
+                    detectivestate = true;
 
                 }
 
@@ -558,6 +599,7 @@
 
                     targetlist = result.filter(item => item !== prosecutor)
                     target = targetlist[Math.floor(Math.random() * targetlist.length)];
+                    prosecutorstate = true;
 
                 }
 
@@ -580,6 +622,11 @@
                 document.getElementById("wordis").style.display = "none"
                 document.getElementById("person").style.color = "#FFF191"
                 document.getElementById("players").style.padding = "0"
+                document.getElementById("voting").style.display = "none";
+                document.getElementById("error").style.display = "none";
+                document.getElementById("reveal").style.display = "none";
+                document.getElementById("results").style.display = "none";
+
 
                 x = -1;
                 next()
@@ -675,7 +722,7 @@
             for (const word of words) {
                 counts[word] = (counts[word] || 0) + 1;
 
-   
+
                 if (counts[word] > maxFreq) {
                     maxFreq = counts[word];
                 }
@@ -700,17 +747,44 @@
 
             }
             else {
-                console.log("finished")
                 document.getElementById("voting").style.display = "none";
+                document.getElementById("reveal").style.display = "block";
                 frequentvote = findMostFrequent(votes);
                 if (frequentvote.length <= 1) {
-                    console.log(frequentvote.length)
-                    console.log(frequentvote + ' has been voted out')
+                    document.getElementById("votedout").textContent = frequentvote + ' has been voted out.';
+                }
+                else if (frequentvote.length == 2) {
+                    document.getElementById("votedout").textContent = 'Tie between ' + frequentvote[0] + ' and ' + frequentvote[1];
                 }
                 else {
-                    console.log("tie")
+                    document.getElementById("votedout").textContent = 'Tie between ' + frequentvote[0] + ', ' + frequentvote[1] + ' and ' + frequentvote[2];
                 }
             }
+        }
+
+        function reveal() {
+            document.getElementById("results").style.display = "block";
+            document.getElementById("reveal").style.display = "none";
+            document.getElementById("result0").style.display = "block";
+            document.getElementById("result0").textContent = imposter + ' was the imposter.'
+            if (detectivestate == true) {
+                document.getElementById("result1").style.display = "block";
+                document.getElementById("result1").textContent = detective + ' was the detective.'
+            }
+            if (prosecutorstate == true) {
+                document.getElementById("result2").style.display = "block";
+                document.getElementById("result2").textContent = prosecutor + ' was the prosecutor.'
+            }
+            if (jesterstate == true) {
+                document.getElementById("result3").style.display = "block";
+                document.getElementById("result3").textContent = jester + ' was the jester.'
+            }
+            if (loverstate == true) {
+                document.getElementById("result4").style.display = "block";
+                document.getElementById("result4").textContent = lover + ' was the lover.'
+            }
+
+
         }
 
         function impostershow() {
