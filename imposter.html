@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <title>Imposter</title>
+
+</head>
+
+<style>
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    a:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    .background {
+        background: #121212;
+        color: white;
+    }
+
+    .prevent-select {
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Standard syntax */
+    }
+
+    .homebutton {
+        padding: 10px;
+        border-radius: 100px;
+        background-color: #282828;
+        width: 75px;
+    }
+
+    .margtop {
+        margin-top: 10px;
+    }
+
+    .votingbtn {
+        width: 270px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .roles {
+        width: 100px;
+        height: 35px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .button {
+        width: 315px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .button:hover {
+        background-color: #2e2e2e;
+    }
+
+    .smallbutton:hover {
+        background-color: #343434;
+    }
+
+    .mediumbutton {
+        width: 130%;
+        background-color: #282828;
+        color: white;
+    }
+
+    .smallbutton {
+        width: 100%;
+        background-color: #282828;
+        color: white;
+    }
+
+    .smallxbutton {
+        width: 100%px;
+        background-color: #282828;
+        color: white;
+    }
+
+    .frame {
+        padding: 30px;
+        border-radius: 25px;
+        background-color: #181818;
+    }
+
+    .txt {
+        text-align: center;
+    }
+
+    #vote {
+        margin-top: 10px;
+    }
+</style>
+
+
+<body class="background">
+    <script src="js/bootstrap.js"></script>
+
+    <a href="index.html">
+        <h3 class="homebutton txt">Back</h3>
+    </a>
+    <p id="help" class="txt" style=" margin-top: 30px;">Hello</p>
+
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div id="players" class="frame">
+            <div id="playerpage">
+                <h6 type="number" max="7" min="2" class="form-label" style="color:white;">How many players (Max
+                    7)</h6>
+                <input type="number" class="form-control" id="playeramount">
+                <h4 id="start" onmousedown="start()" ontouchstart="start()" class="btn btn-lg button"
+                    style="margin-top: 20px;">
+                    Continue</h4>
+            </div>
+            <div id="holder" class="mb-3 mx-auto" style="width:250px;">
+
+                <div id="0">
+                    <h6 class="form-label margtop">Player 1</h6>
+                    <input id="input0" class="form-control">
+                </div>
+                <div id="1">
+                    <h6 class="form-label margtop">Player 2</h6>
+                    <input id="input1" class="form-control">
+                </div>
+                <div id="2">
+                    <h6 class="form-label margtop">Player 3</h6>
+                    <input id="input2" class="form-control">
+                </div>
+                <div id="3">
+                    <h6 class="form-label margtop">Player 4</h6>
+                    <input id="input3" class="form-control">
+                </div>
+                <div id="4">
+                    <h6 class="form-label margtop">Player 5</h6>
+                    <input id="input4" class="form-control">
+                </div>
+                <div id="5">
+                    <h6 class="form-label margtop">Player 6</h6>
+                    <input id="input5" class="form-control">
+                </div>
+                <div id="6">
+                    <h6 class="form-label margtop">Player 7</h5>
+                        <input id="input6" class="form-control">
+                </div>
+                <h4 id="rolelist" onclick="checks()" ontouchstart="checks()" class="btn btn-lg smallbutton"
+                    style="margin-top: 25px;">
+                    Roles</h4>
+            </div>
+
+            <div class="container" id="checks">
+                <div class="row row-cols-2">
+                    <div class="col">
+                        <h6 class="form-check-label">Jester</h6>
+                        <input id="jesterchance" type="number" min="0" value="15" max="100" placeholder="0%"
+                            class="form-control roles" onformchange="handleCheck(this)">
+                    </div>
+                    <div class="col">
+                        <h6 class="form-check-label">Lover</h6>
+                        <input id="loverchance" type="number" min="0" value="15" max="100" placeholder="0%"
+                            class="form-control roles" onformchange="handleCheck(this)">
+                    </div>
+                    <div class="col">
+                        <h6 class="form-check-label margtop">Detective</h6>
+                        <input id="detectivechance" type="number" min="0" value="15" max="100" placeholder="0%"
+                            class="form-control roles" onformchange="handleCheck(this)">
+                    </div>
+                    <div class="col">
+                        <h6 class="form-check-label margtop">Prosecutor</h6>
+                        <input id="prosecutorchance" type="number" min="0" value="15" max="100" placeholder="0%"
+                            class="form-control roles" onformchange="handleCheck(this)">
+                    </div>
+                </div>
+            </div>
+            <h4 id="play" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton"
+                style="margin-top: 15px;">
+                Start
+            </h4>
+            <p id="error" class="error txt">Error</p>
+        </div>
+
+        <div class="position-absolute top-50 start-50 translate-middle"></div>
+        <div id="card" class="prevent-select frame" onmousedown="mouseDown()" onmouseup="mouseUp()"
+            ontouchstart="mouseDown()" ontouchend="mouseUp()">
+            <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
+                <h1 id="person" class="card-text">Person</h1>
+                <h4 id="roleis">Your Role is:</h4>
+                <h1 id="role" class="card-text">Hold to reveal</h2>
+                    <div id="loverdiv" class="txt">
+                        <h4 id="lovertext">Your lover is:</h4>
+                        <h1 id="loverpartner">Lover</h1>
+                    </div>
+                    <div id="detectiveoverview" class="txt">
+                        <h4 id="demo1" class="card-text">Analysis:</h4>
+                        <h5 id="detective1" class="">Jesters</h5>
+                        <h5 id="detective2" class="">Prosecutors</h5>
+                        <h5 id="detective3" class="">Lover</h5>
+                        <h5 id="detective4" class=""></h5>
+                    </div>
+                    <div id="prosecutordiv" class="txt">
+                        <h4 id="targetis" class="card-text">Your target is:</h4>
+                        <h1 id="target" class="">Target</h1>
+                    </div>
+                    <h4 id="wordis">Your word is:</h4>
+                    <h1 id="word" class="card-text"></h1>
+
+
+
+            </div>
+        </div>
+        <h4 id="nextbutton" class=" btn btn-lg smallbutton" style="margin-top: 25px;" onclick="next()">Next</h4>
+
+        <div id="startgame" class="frame txt">
+            <h1 id="starter" style="color:#FFF191">Starter</h1>
+            <h1 id="starttext">Starts</h1>
+            <h4 id="revealbtn" class="btn btn-lg smallbutton margtop" onclick="reveal()">Reveal</h4>
+            <!--<h4 id="vote" onmousedown="vote()" ontouchstart="vote()" class="btn btn-lg smallbutton">Vote</h4>-->
+        </div>
+
+        <div id="voting" class="frame">
+            <h1 class="txt">Voting:</h1>
+            <h1 id="name" class="txt" style="color:#FFF191;">Name</h1>
+            <h4 id="20" class="btn btn-lg smallxbutton" onclick="votebutton(result[0])">Person 1</h4>
+            <h4 id="21" class="btn btn-lg smallxbutton" onclick="votebutton(result[1])">Person 2</h4>
+            <h4 id="22" class="btn btn-lg smallxbutton" onclick="votebutton(result[2])">Person 3</h4>
+            <h4 id="23" class="btn btn-lg smallxbutton" onclick="votebutton(result[3])">Person 4</h4>
+            <h4 id="24" class="btn btn-lg smallxbutton" onclick="votebutton(result[4])">Person 5</h4>
+            <h4 id="25" class="btn btn-lg smallxbutton" onclick="votebutton(result[5])">Person 6</h4>
+            <h4 id="26" class="btn btn-lg smallxbutton" onclick="votebutton(result[6])">Person 7</h4>
+        </div>
+
+        <div id="reveal" class="frame">
+            <h1 id="votedout" class="txt" style="color:#ffffff; font-size:larger;">Name</h1>
+            <h4 id="revealbtn" class="btn btn-lg smallbutton margtop" onclick="reveal()">Reveal</h4>
+        </div>
+        
+
+        <div id="results" class="frame">
+            <h1 id="result0" class="txt" style="color:#B50000; font-size:x-large;">Imposter</h1>
+            <h1 id="result1" class="txt" style="color:#006DFF; font-size:x-large;">Detective</h1>
+            <h1 id="result2" class="txt" style="color:#FFEA00; font-size:x-large;">Prosecutor</h1>
+            <h1 id="result3" class="txt" style="color:pink; font-size:x-large;">Jester</h1>
+            <h1 id="result4" class="txt" style="color:#FF29AB; font-size:x-large;">Lover</h1>
+            <h1 id="result5" class="txt" style="color:#FFF191; font-size:x-large;">Name</h1>
+            <h1 id="result6" class="txt" style="color:#FFF191; font-size:x-large;">Name</h1>
+
+            <h4 id="playagain" onmousedown="play()" ontouchstart="play()" class="btn btn-lg smallbutton margtop">Play
+                Again</h4>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script src="imposter.js"></script>
+</body>
+
+</html>
